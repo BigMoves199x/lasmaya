@@ -1,13 +1,44 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowUpRight,
+  Volume2,
+  VolumeX,
+} from "lucide-react";
 import gsap from "gsap";
 
 export default function Hero() {
   const heroRef = useRef<HTMLElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  const volumeTweenRef = useRef<gsap.core.Tween | null>(null);
+  const soundOnRef = useRef(false);
+
+  const [soundOn, setSoundOn] = useState(false);
+
+  const TARGET_VOLUME = 0.40;
+
+  /* =========================================================
+     KEEP SOUND REF IN SYNC
+  ========================================================= */
+
+  useEffect(() => {
+    soundOnRef.current = soundOn;
+  }, [soundOn]);
+
+  /* =========================================================
+     HERO ENTRANCE ANIMATION
+  ========================================================= */
 
   useLayoutEffect(() => {
     const hero = heroRef.current;
@@ -72,11 +103,201 @@ export default function Hero() {
             duration: 0.6,
           },
           "-=0.4",
+        )
+        .from(
+          "[data-hero-sound]",
+          {
+            x: 20,
+            opacity: 0,
+            duration: 0.7,
+          },
+          "-=0.5",
         );
     }, hero);
 
     return () => context.revert();
   }, []);
+
+  /* =========================================================
+     AUDIO FADE HELPERS
+  ========================================================= */
+
+  const fadeAudioIn = useCallback(async () => {
+    const audio = audioRef.current;
+
+    if (!audio) return;
+
+    volumeTweenRef.current?.kill();
+
+    try {
+      if (audio.paused) {
+        audio.volume = 0;
+        await audio.play();
+      }
+
+      volumeTweenRef.current = gsap.to(audio, {
+        volume: TARGET_VOLUME,
+        duration: 1.5,
+        ease: "power2.out",
+      });
+    } catch {
+      setSoundOn(false);
+      soundOnRef.current = false;
+    }
+  }, []);
+
+  const fadeAudioOut = useCallback(() => {
+    const audio = audioRef.current;
+
+    if (!audio || audio.paused) return;
+
+    volumeTweenRef.current?.kill();
+
+    volumeTweenRef.current = gsap.to(audio, {
+      volume: 0,
+      duration: 1.3,
+      ease: "power2.out",
+
+      onComplete: () => {
+        audio.pause();
+      },
+    });
+  }, []);
+
+  /* =========================================================
+     AUDIO SETUP + AUTOPLAY ATTEMPT
+  ========================================================= */
+
+  useEffect(() => {
+    const audio = audioRef.current;
+
+    if (!audio) return;
+
+    audio.loop = true;
+    audio.volume = 0;
+
+    let cancelled = false;
+
+    const attemptAutoplay = async () => {
+      try {
+        await audio.play();
+
+        if (cancelled) return;
+
+        setSoundOn(true);
+        soundOnRef.current = true;
+
+        gsap.to(audio, {
+          volume: TARGET_VOLUME,
+          duration: 1.8,
+          ease: "power2.out",
+        });
+      } catch {
+        /*
+         * Normal browser behaviour.
+         * Most browsers block audible autoplay until the
+         * visitor interacts with the page.
+         */
+        if (!cancelled) {
+          setSoundOn(false);
+          soundOnRef.current = false;
+        }
+      }
+    };
+
+    attemptAutoplay();
+
+    return () => {
+      cancelled = true;
+
+      volumeTweenRef.current?.kill();
+
+      audio.pause();
+    };
+  }, []);
+
+  /* =========================================================
+     HERO VISIBILITY
+     FADE MUSIC OUT WHEN LEAVING HERO
+  ========================================================= */
+
+  useEffect(() => {
+    const hero = heroRef.current;
+
+    if (!hero) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry) return;
+
+        if (entry.isIntersecting) {
+          if (soundOnRef.current) {
+            fadeAudioIn();
+          }
+        } else {
+          fadeAudioOut();
+        }
+      },
+      {
+        threshold: 0.12,
+      },
+    );
+
+    observer.observe(hero);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [fadeAudioIn, fadeAudioOut]);
+
+  /* =========================================================
+     SOUND TOGGLE
+  ========================================================= */
+
+  const toggleSound = async () => {
+    const audio = audioRef.current;
+
+    if (!audio) return;
+
+    volumeTweenRef.current?.kill();
+
+    if (soundOnRef.current) {
+      soundOnRef.current = false;
+      setSoundOn(false);
+
+      volumeTweenRef.current = gsap.to(audio, {
+        volume: 0,
+        duration: 0.65,
+        ease: "power2.out",
+
+        onComplete: () => {
+          audio.pause();
+        },
+      });
+
+      return;
+    }
+
+    try {
+      audio.volume = 0;
+
+      await audio.play();
+
+      soundOnRef.current = true;
+      setSoundOn(true);
+
+      volumeTweenRef.current = gsap.to(audio, {
+        volume: TARGET_VOLUME,
+        duration: 1.1,
+        ease: "power2.out",
+      });
+    } catch (error) {
+      console.error("Unable to play hero audio:", error);
+
+      soundOnRef.current = false;
+      setSoundOn(false);
+    }
+  };
 
   return (
     <section
@@ -84,29 +305,45 @@ export default function Hero() {
       className="relative min-h-[100svh] overflow-hidden bg-[#090b0a] text-white"
     >
       {/* =====================================================
+          BACKGROUND AUDIO
+      ====================================================== */}
+
+      <audio
+        ref={audioRef}
+        src="/awa-instrumental.mp3"
+        preload="auto"
+        loop
+      />
+
+      {/* =====================================================
           BACKGROUND
-      ===================================================== */}
+      ====================================================== */}
 
       <div className="absolute inset-0 z-0">
         {/* Main green atmosphere */}
+
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_68%_48%,rgba(18,63,50,0.88),transparent_42%)]" />
 
         {/* Gold glow */}
+
         <div className="absolute left-[7%] top-[18%] h-[420px] w-[420px] rounded-full bg-[#c6a15b]/[0.04] blur-[130px]" />
 
         {/* Green glow on portrait side */}
+
         <div className="absolute right-[-10%] top-[12%] h-[650px] w-[650px] rounded-full bg-[#174c3d]/25 blur-[150px] sm:right-[0%]" />
 
         {/* Subtle grid */}
+
         <div className="absolute inset-0 opacity-[0.04] [background-image:linear-gradient(rgba(255,255,255,.5)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.5)_1px,transparent_1px)] [background-size:80px_80px]" />
 
         {/* Overall left darkness */}
+
         <div className="absolute inset-0 bg-gradient-to-r from-[#090b0a] via-[#090b0a]/10 to-transparent" />
       </div>
 
       {/* =====================================================
           GIANT BACKGROUND YEAR
-      ===================================================== */}
+      ====================================================== */}
 
       <div
         data-hero-year
@@ -114,9 +351,10 @@ export default function Hero() {
         className="pointer-events-none absolute left-1/2 top-[45%] z-[1] -translate-x-1/2 -translate-y-1/2 select-none lg:left-[48%] lg:top-[48%]"
       >
         <span
-          className="font-display whitespace-nowrap text-[clamp(10rem,38vw,39rem)] font-semibold leading-none tracking-[-0.08em] text-transparent"
+          className="whitespace-nowrap font-display text-[clamp(10rem,38vw,39rem)] font-semibold leading-none tracking-[-0.08em] text-transparent"
           style={{
-            WebkitTextStroke: "1px rgba(198,161,91,.16)",
+            WebkitTextStroke:
+              "1px rgba(198,161,91,.16)",
           }}
         >
           2026
@@ -125,7 +363,7 @@ export default function Hero() {
 
       {/* =====================================================
           ABDULHAFIS PORTRAIT
-      ===================================================== */}
+      ====================================================== */}
 
       <div
         data-hero-person
@@ -153,6 +391,7 @@ export default function Hero() {
         "
       >
         {/* Green glow directly behind portrait */}
+
         <div
           className="
             absolute
@@ -172,9 +411,11 @@ export default function Hero() {
         />
 
         {/* Subtle gold warmth */}
+
         <div className="absolute bottom-[12%] left-[55%] h-[40%] w-[55%] -translate-x-1/2 rounded-full bg-[#c6a15b]/[0.045] blur-[100px]" />
 
         {/* Actual portrait */}
+
         <div
           className="
             absolute
@@ -209,32 +450,30 @@ export default function Hero() {
 
       {/* =====================================================
           HERO / PORTRAIT BLENDING
-
-          z-20 = above portrait
-          z-30 = text stays above gradients
-      ===================================================== */}
+      ====================================================== */}
 
       <div className="pointer-events-none absolute inset-0 z-20">
         {/* =============================================
             DESKTOP LEFT CLOSING GRADIENT
+            Reduced spread
         ============================================= */}
 
         <div
           className="absolute inset-0 hidden lg:block"
           style={{
             background: `
-      linear-gradient(
-        90deg,
-        #090b0a 0%,
-        #090b0a 18%,
-        rgba(9,11,10,0.96) 23%,
-        rgba(9,11,10,0.78) 29%,
-        rgba(9,11,10,0.52) 35%,
-        rgba(9,11,10,0.28) 41%,
-        rgba(9,11,10,0.10) 47%,
-        transparent 53%
-      )
-    `,
+              linear-gradient(
+                90deg,
+                #090b0a 0%,
+                #090b0a 18%,
+                rgba(9,11,10,0.96) 23%,
+                rgba(9,11,10,0.78) 29%,
+                rgba(9,11,10,0.52) 35%,
+                rgba(9,11,10,0.28) 41%,
+                rgba(9,11,10,0.10) 47%,
+                transparent 53%
+              )
+            `,
           }}
         />
 
@@ -248,10 +487,10 @@ export default function Hero() {
             inset-y-0
             left-0
             hidden
-            w-[58%]
+            w-[46%]
             bg-gradient-to-r
             from-[#090b0a]
-            via-[#090b0a]/70
+            via-[#090b0a]/55
             to-transparent
 
             md:block
@@ -261,9 +500,6 @@ export default function Hero() {
 
         {/* =============================================
             MOBILE LEFT FADE
-
-            Lighter than desktop so Abdulhafis remains
-            bold and visible on small screens.
         ============================================= */}
 
         <div
@@ -271,13 +507,13 @@ export default function Hero() {
             absolute
             inset-y-0
             left-0
-            w-[43%]
+            w-[34%]
             bg-gradient-to-r
             from-[#090b0a]
-            via-[#090b0a]/65
+            via-[#090b0a]/50
             to-transparent
 
-            sm:w-[48%]
+            sm:w-[39%]
             md:hidden
           "
         />
@@ -327,12 +563,13 @@ export default function Hero() {
         />
 
         {/* Soft center transition */}
+
         <div className="absolute bottom-[10%] left-[45%] h-[38%] w-[32%] rounded-full bg-[#123f32]/15 blur-[90px]" />
       </div>
 
       {/* =====================================================
           EDITION
-      ===================================================== */}
+      ====================================================== */}
 
       <div
         data-hero-edition
@@ -361,7 +598,7 @@ export default function Hero() {
 
       {/* =====================================================
           LEFT — AWARD TITLE
-      ===================================================== */}
+      ====================================================== */}
 
       <div
         data-hero-title
@@ -415,14 +652,14 @@ export default function Hero() {
             lg:text-[0.75rem]
           "
         >
-          Celebrating leadership, service, impact and the individuals helping
-          shape the future of Lagos.
+          Celebrating leadership, service, impact and the
+          individuals helping shape the future of Lagos.
         </p>
       </div>
 
       {/* =====================================================
-          WINNER DETAILS — OVER PORTRAIT
-      ===================================================== */}
+          WINNER DETAILS
+      ====================================================== */}
 
       <div
         data-winner-details
@@ -507,6 +744,7 @@ export default function Hero() {
             "
           >
             Explore 2026
+
             <span
               className="
                 flex
@@ -539,7 +777,7 @@ export default function Hero() {
 
       {/* =====================================================
           SCROLL INDICATOR — DESKTOP
-      ===================================================== */}
+      ====================================================== */}
 
       <a
         data-hero-scroll
@@ -585,8 +823,113 @@ export default function Hero() {
       </a>
 
       {/* =====================================================
+          SOUND CONTROL
+      ====================================================== */}
+
+      <button
+        data-hero-sound
+        type="button"
+        onClick={toggleSound}
+        aria-label={
+          soundOn
+            ? "Mute Awa Instrumental"
+            : "Play Awa Instrumental"
+        }
+        aria-pressed={soundOn}
+        className="
+          group
+          absolute
+          right-[var(--page-padding)]
+          top-[47%]
+          z-40
+          flex
+          -translate-y-1/2
+          items-center
+          gap-3
+
+          sm:top-[48%]
+        "
+      >
+        {/* TEXT */}
+
+        <div className="hidden text-right md:block">
+          <p
+            className={`
+              text-[0.43rem]
+              font-bold
+              uppercase
+              tracking-[0.2em]
+              transition-colors
+              duration-300
+
+              ${
+                soundOn
+                  ? "text-[#dfc27b]/80"
+                  : "text-white/30"
+              }
+            `}
+          >
+            {soundOn ? "Sound On" : "Sound Off"}
+          </p>
+
+          <p className="mt-1 text-[0.4rem] uppercase tracking-[0.14em] text-white/20">
+            Awa Instrumental
+          </p>
+        </div>
+
+        {/* CIRCLE */}
+
+        <span
+          className={`
+            relative
+            flex
+            h-11
+            w-11
+            items-center
+            justify-center
+            rounded-full
+            border
+            backdrop-blur-md
+            transition-all
+            duration-500
+
+            ${
+              soundOn
+                ? "border-[#dfc27b]/50 bg-[#dfc27b]/10 text-[#dfc27b]"
+                : "border-white/15 bg-[#090b0a]/20 text-white/45"
+            }
+
+            group-hover:border-[#dfc27b]/70
+            group-hover:bg-[#dfc27b]/10
+            group-hover:text-[#dfc27b]
+
+            sm:h-12
+            sm:w-12
+          `}
+        >
+          {/* OUTER ACTIVE RING */}
+
+          {soundOn && (
+            <span className="absolute inset-[-5px] rounded-full border border-[#dfc27b]/15" />
+          )}
+
+          {/* SMALL PLAYING INDICATOR */}
+
+          {soundOn && (
+            <span className="absolute right-[1px] top-[1px] h-[5px] w-[5px] rounded-full bg-[#dfc27b] shadow-[0_0_10px_rgba(223,194,123,.9)]" />
+          )}
+
+          {soundOn ? (
+            <Volume2 size={15} strokeWidth={1.5} />
+          ) : (
+            <VolumeX size={15} strokeWidth={1.5} />
+          )}
+        </span>
+      </button>
+
+      {/* =====================================================
           MOBILE TOP VIGNETTE
-      ===================================================== */}
+      ====================================================== */}
 
       <div
         className="
