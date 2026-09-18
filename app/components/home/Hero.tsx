@@ -26,7 +26,7 @@ export default function Hero() {
 
   const [soundOn, setSoundOn] = useState(false);
 
-  const TARGET_VOLUME = 0.40;
+  const TARGET_VOLUME = 0.20;
 
   /* =========================================================
      KEEP SOUND REF IN SYNC
