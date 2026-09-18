@@ -1,26 +1,143 @@
 @import "tailwindcss";
 
+/* ============================================
+   LASMAYA DESIGN SYSTEM
+============================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Core */
+  --black: #090b0a;
+  --charcoal: #111512;
+  --deep-green: #123f32;
+  --green-dark: #0c2d24;
+
+  /* Prestige */
+  --gold: #c6a15b;
+  --gold-light: #dfc27b;
+  --gold-muted: #8e7545;
+
+  /* Light */
+  --ivory: #f5f2e9;
+  --ivory-dark: #e9e4d8;
+  --white: #ffffff;
+
+  /* Text */
+  --text-dark: #161916;
+  --text-light: #f7f4ed;
+  --text-muted: #a8aaa4;
+
+  /* Lines */
+  --border-dark: rgba(255, 255, 255, 0.12);
+  --border-gold: rgba(198, 161, 91, 0.35);
+
+  /* Layout */
+  --container: 1440px;
+  --page-padding: clamp(1.25rem, 4vw, 5rem);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ============================================
+   RESET
+============================================ */
+
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--ivory);
+  color: var(--text-dark);
+  font-family: var(--font-sans), sans-serif;
+  overflow-x: hidden;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ============================================
+   TYPOGRAPHY
+============================================ */
+
+.font-display {
+  font-family: var(--font-display), serif;
+}
+
+.font-sans {
+  font-family: var(--font-sans), sans-serif;
+}
+
+.display-title {
+  font-family: var(--font-display), serif;
+  font-size: clamp(4.25rem, 9.4vw, 10.5rem);
+  font-weight: 500;
+  line-height: 0.77;
+  letter-spacing: -0.055em;
+}
+
+.section-title {
+  font-family: var(--font-display), serif;
+  font-size: clamp(3rem, 6vw, 7rem);
+  font-weight: 500;
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+}
+
+.eyebrow {
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* ============================================
+   LAYOUT
+============================================ */
+
+.site-container {
+  width: min(
+    calc(100% - (var(--page-padding) * 2)),
+    var(--container)
+  );
+  margin-inline: auto;
+}
+
+/* ============================================
+   SELECTION
+============================================ */
+
+::selection {
+  background: var(--gold);
+  color: var(--black);
+}
+
+/* ============================================
+   SCROLLBAR
+============================================ */
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold-muted);
 }
