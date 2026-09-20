@@ -211,10 +211,6 @@ export default function Hero() {
           ease: "power2.out",
         });
       } catch {
-        /*
-         * Browsers commonly block audible autoplay
-         * until the visitor interacts with the page.
-         */
         if (!cancelled) {
           setSoundOn(false);
           soundOnRef.current = false;
@@ -226,7 +222,6 @@ export default function Hero() {
 
     return () => {
       cancelled = true;
-
       volumeTweenRef.current?.kill();
       audio.pause();
     };
@@ -334,8 +329,6 @@ export default function Hero() {
       ====================================================== */}
 
       <div className="absolute inset-0 z-0">
-        {/* Main green atmosphere */}
-
         <div
           className="
             absolute
@@ -343,8 +336,6 @@ export default function Hero() {
             bg-[radial-gradient(circle_at_69%_46%,rgba(18,63,50,0.92),transparent_43%)]
           "
         />
-
-        {/* Gold atmosphere */}
 
         <div
           className="
@@ -358,8 +349,6 @@ export default function Hero() {
             blur-[140px]
           "
         />
-
-        {/* Portrait green glow */}
 
         <div
           className="
@@ -376,8 +365,6 @@ export default function Hero() {
           "
         />
 
-        {/* Lower atmosphere */}
-
         <div
           className="
             absolute
@@ -391,8 +378,6 @@ export default function Hero() {
           "
         />
 
-        {/* Subtle grid */}
-
         <div
           className="
             absolute
@@ -402,8 +387,6 @@ export default function Hero() {
             [background-size:80px_80px]
           "
         />
-
-        {/* Left grounding */}
 
         <div
           className="
@@ -458,6 +441,7 @@ export default function Hero() {
 
       {/* =====================================================
           PORTRAIT
+          SMALLER ON MOBILE / ORIGINAL SIZE FROM SM UPWARD
       ====================================================== */}
 
       <div
@@ -468,9 +452,9 @@ export default function Hero() {
           bottom-0
           z-10
 
-          right-[-22%]
-          h-[72%]
-          w-[108vw]
+          right-[-3%]
+          h-[42%]
+          w-[70vw]
 
           sm:right-[-15%]
           sm:h-[77%]
@@ -491,13 +475,20 @@ export default function Hero() {
           className="
             absolute
             left-[55%]
-            top-[38%]
-            h-[75%]
-            w-[85%]
+            top-[40%]
+            h-[65%]
+            w-[78%]
             -translate-x-1/2
             rounded-full
-            bg-[#174c3d]/35
-            blur-[100px]
+            bg-[#174c3d]/25
+            blur-[80px]
+
+            sm:left-[55%]
+            sm:top-[38%]
+            sm:h-[75%]
+            sm:w-[85%]
+            sm:bg-[#174c3d]/35
+            sm:blur-[100px]
 
             lg:left-[50%]
             lg:bg-[#174c3d]/30
@@ -510,14 +501,20 @@ export default function Hero() {
         <div
           className="
             absolute
-            bottom-[12%]
+            bottom-[8%]
             left-[55%]
-            h-[40%]
-            w-[55%]
+            h-[34%]
+            w-[48%]
             -translate-x-1/2
             rounded-full
-            bg-[#c6a15b]/[0.055]
-            blur-[100px]
+            bg-[#c6a15b]/[0.05]
+            blur-[75px]
+
+            sm:bottom-[12%]
+            sm:h-[40%]
+            sm:w-[55%]
+            sm:bg-[#c6a15b]/[0.055]
+            sm:blur-[100px]
           "
         />
 
@@ -529,7 +526,7 @@ export default function Hero() {
             inset-0
             origin-bottom-right
 
-            scale-[1.28]
+            scale-[1.02]
 
             sm:scale-[1.22]
             md:scale-[1.16]
@@ -541,7 +538,7 @@ export default function Hero() {
             alt="Engr. Abdulhafis Gbolahan Toriola"
             fill
             priority
-            sizes="(max-width: 640px) 108vw, (max-width: 768px) 92vw, (max-width: 1024px) 72vw, 58vw"
+            sizes="(max-width: 640px) 70vw, (max-width: 768px) 92vw, (max-width: 1024px) 72vw, 58vw"
             className="
               object-contain
               object-bottom-right
@@ -607,10 +604,10 @@ export default function Hero() {
             absolute
             inset-y-0
             left-0
-            w-[34%]
+            w-[30%]
             bg-gradient-to-r
             from-[#090b0a]
-            via-[#090b0a]/50
+            via-[#090b0a]/45
             to-transparent
 
             sm:w-[39%]
@@ -625,14 +622,16 @@ export default function Hero() {
             absolute
             inset-x-0
             bottom-0
-            h-[43%]
+            h-[30%]
 
             bg-gradient-to-t
             from-[#090b0a]
-            via-[#090b0a]/68
+            via-[#090b0a]/58
             to-transparent
 
             sm:h-[40%]
+            sm:via-[#090b0a]/68
+
             md:h-[37%]
             lg:h-[35%]
           "
@@ -645,13 +644,14 @@ export default function Hero() {
             absolute
             bottom-0
             right-0
-            h-[72%]
+            h-[50%]
             w-[7%]
 
             bg-gradient-to-l
             from-[#090b0a]/55
             to-transparent
 
+            sm:h-[72%]
             lg:w-[10%]
           "
         />
@@ -661,13 +661,18 @@ export default function Hero() {
         <div
           className="
             absolute
-            bottom-[10%]
-            left-[45%]
-            h-[38%]
+            bottom-[5%]
+            left-[55%]
+            h-[28%]
             w-[32%]
             rounded-full
             bg-[#123f32]/15
-            blur-[90px]
+            blur-[80px]
+
+            sm:bottom-[10%]
+            sm:left-[45%]
+            sm:h-[38%]
+            sm:blur-[90px]
           "
         />
       </div>
@@ -689,12 +694,10 @@ export default function Hero() {
           sm:top-[110px]
           lg:top-[118px]
         "
-      >
-       
-      </div>
+      />
 
       {/* =====================================================
-          LEFT — MAIN AWARD IDENTITY
+          MAIN AWARD IDENTITY
       ====================================================== */}
 
       <div
@@ -702,11 +705,14 @@ export default function Hero() {
         className="
           absolute
           left-[var(--page-padding)]
-          top-[17%]
+          right-[var(--page-padding)]
+          top-[15%]
           z-30
           max-w-[790px]
 
+          sm:right-auto
           sm:top-[19%]
+
           md:top-[21%]
           lg:top-[22%]
           xl:top-[23%]
@@ -716,17 +722,18 @@ export default function Hero() {
 
         <div
           data-title-label
-          className="mb-5 flex items-center gap-3 sm:mb-6"
+          className="mb-4 flex items-center gap-3 sm:mb-6"
         >
           <p
             className="
-              text-[0.84rem]
+              text-[0.8rem]
               font-bold
               uppercase
-              tracking-[0.24em]
+              tracking-[0.22em]
               text-[#dfc27b]
 
               sm:text-[1rem]
+              sm:tracking-[0.24em]
             "
           >
             Lagos State
@@ -738,21 +745,22 @@ export default function Hero() {
         <h1
           className="
             font-display
-            text-[clamp(3.7rem,14vw,9rem)]
+            text-[clamp(3.4rem,13vw,5rem)]
             font-bold
-            leading-[0.78]
-            tracking-[-0.06em]
+            leading-[0.8]
+            tracking-[-0.055em]
             text-white
 
             drop-shadow-[0_10px_40px_rgba(0,0,0,.32)]
 
             sm:text-[clamp(4.5rem,11vw,9rem)]
+
             lg:text-[clamp(4.5rem,7.8vw,6rem)]
           "
         >
           <span className="block overflow-hidden pb-[0.05em]">
             <span data-title-line className="block">
-              Man of 
+              Man of
             </span>
           </span>
 
@@ -761,7 +769,7 @@ export default function Hero() {
               data-title-line
               className="block text-[#f5f2e9]"
             >
-            the Year
+              the Year
             </span>
           </span>
         </h1>
@@ -772,6 +780,7 @@ export default function Hero() {
           data-title-line
           className="mt-3 flex items-center gap-4 sm:mt-4 lg:mt-5"
         >
+          <span className="h-px w-8 bg-[#dfc27b]/70 sm:w-10" />
 
           <span
             className="
@@ -792,14 +801,14 @@ export default function Hero() {
 
         {/* SUPPORTING COPY */}
 
-        <div data-title-copy className="mt-6 sm:mt-7 lg:mt-8">
+        <div data-title-copy className="mt-5 sm:mt-7 lg:mt-8">
           <p
             className="
-              max-w-[320px]
-              text-[1rem]
+              max-w-[310px]
+              text-[0.94rem]
               font-medium
-              leading-[1.7]
-              text-white/78
+              leading-[1.65]
+              text-white/80
 
               sm:max-w-[390px]
               sm:text-[0.94rem]
@@ -839,39 +848,42 @@ export default function Hero() {
           xl:w-[440px]
         "
       >
-        {/* Awardee label */}
+        {/* AWARDEE LABEL */}
 
-        <div className="mb-4 flex items-center gap-3 sm:mb-5">
-
+        <div className="mb-3 flex items-center gap-3 sm:mb-5">
           <p
             className="
-              text-[0.84rem]
+              text-[0.76rem]
               font-bold
               uppercase
-              tracking-[0.22em]
+              tracking-[0.2em]
               text-[#dfc27b]
 
               sm:text-[1rem]
+              sm:tracking-[0.22em]
             "
           >
             2026 Awardee
           </p>
         </div>
 
-        {/* Awardee name */}
+        {/* AWARDEE NAME */}
 
         <h2
           className="
+            max-w-[260px]
             font-display
-            text-[clamp(2.15rem,8.5vw,4rem)]
+            text-[2rem]
             font-semibold
-            leading-[0.9]
+            leading-[0.92]
             tracking-[-0.038em]
             text-white
 
             drop-shadow-[0_5px_28px_rgba(0,0,0,.95)]
 
+            sm:max-w-none
             sm:text-[clamp(2.5rem,6vw,4rem)]
+
             lg:text-[clamp(2.6rem,3.5vw,4rem)]
           "
         >
@@ -880,12 +892,12 @@ export default function Hero() {
           Gbolahan Toriola
         </h2>
 
-        {/* Qualification */}
+        {/* QUALIFICATION */}
 
         <p
           className="
-            mt-3
-            text-[0.68rem]
+            mt-2
+            text-[0.62rem]
             font-bold
             uppercase
             tracking-[0.2em]
@@ -898,17 +910,18 @@ export default function Hero() {
           FNSE
         </p>
 
-        {/* Role */}
+        {/* ROLE */}
 
         <p
           className="
-            mt-4
-            max-w-[300px]
-            text-[1rem]
+            mt-3
+            max-w-[250px]
+            text-[0.82rem]
             font-medium
-            leading-[1.65]
-            text-white/78
+            leading-[1.55]
+            text-white/80
 
+            sm:mt-4
             sm:max-w-[330px]
             sm:text-[0.88rem]
 
@@ -922,7 +935,7 @@ export default function Hero() {
 
         {/* CTA */}
 
-        <div className="mt-5 sm:mt-7">
+        <div className="mt-4 sm:mt-7">
           <Link
             href="/editions/2026"
             className="
@@ -935,7 +948,7 @@ export default function Hero() {
             <span
               className="
                 relative
-                text-[0.64rem]
+                text-[0.6rem]
                 font-bold
                 uppercase
                 tracking-[0.18em]
@@ -1102,7 +1115,7 @@ export default function Hero() {
           group
           absolute
           right-[var(--page-padding)]
-          top-[46%]
+          top-[47%]
           z-40
           flex
           -translate-y-1/2
@@ -1113,7 +1126,7 @@ export default function Hero() {
           lg:top-[48%]
         "
       >
-        {/* Sound text */}
+        {/* SOUND TEXT */}
 
         <div className="hidden text-right md:block">
           <p
@@ -1149,7 +1162,7 @@ export default function Hero() {
           </p>
         </div>
 
-        {/* Sound circle */}
+        {/* SOUND CIRCLE */}
 
         <span
           className={`
@@ -1179,8 +1192,6 @@ export default function Hero() {
             sm:w-12
           `}
         >
-          {/* Active ring */}
-
           {soundOn && (
             <span
               className="
@@ -1192,8 +1203,6 @@ export default function Hero() {
               "
             />
           )}
-
-          {/* Active dot */}
 
           {soundOn && (
             <span
