@@ -26,7 +26,7 @@ export default function Hero() {
 
   const [soundOn, setSoundOn] = useState(false);
 
-  const TARGET_VOLUME = 0.20;
+  const TARGET_VOLUME = 0.24;
 
   /* =========================================================
      KEEP SOUND REF IN SYNC
@@ -54,18 +54,18 @@ export default function Hero() {
 
       timeline
         .from("[data-hero-edition]", {
-          y: 20,
+          y: 18,
           opacity: 0,
           duration: 0.7,
         })
         .from(
           "[data-hero-year]",
           {
-            scale: 0.92,
+            scale: 0.94,
             opacity: 0,
             duration: 1.25,
           },
-          "-=0.4",
+          "-=0.45",
         )
         .from(
           "[data-hero-person]",
@@ -74,26 +74,45 @@ export default function Hero() {
             opacity: 0,
             duration: 1.2,
           },
-          "-=0.9",
+          "-=0.95",
         )
         .from(
-          "[data-hero-title] > *",
+          "[data-title-label]",
           {
-            y: 45,
+            x: -25,
             opacity: 0,
-            stagger: 0.09,
-            duration: 0.85,
+            duration: 0.65,
           },
-          "-=0.8",
+          "-=0.75",
+        )
+        .from(
+          "[data-title-line]",
+          {
+            yPercent: 110,
+            opacity: 0,
+            stagger: 0.11,
+            duration: 0.9,
+            ease: "power4.out",
+          },
+          "-=0.5",
+        )
+        .from(
+          "[data-title-copy]",
+          {
+            y: 25,
+            opacity: 0,
+            duration: 0.75,
+          },
+          "-=0.5",
         )
         .from(
           "[data-winner-details]",
           {
-            y: 30,
+            y: 35,
             opacity: 0,
-            duration: 0.8,
+            duration: 0.85,
           },
-          "-=0.5",
+          "-=0.55",
         )
         .from(
           "[data-hero-scroll]",
@@ -102,7 +121,7 @@ export default function Hero() {
             opacity: 0,
             duration: 0.6,
           },
-          "-=0.4",
+          "-=0.35",
         )
         .from(
           "[data-hero-sound]",
@@ -111,7 +130,7 @@ export default function Hero() {
             opacity: 0,
             duration: 0.7,
           },
-          "-=0.5",
+          "-=0.55",
         );
     }, hero);
 
@@ -157,7 +176,6 @@ export default function Hero() {
       volume: 0,
       duration: 1.3,
       ease: "power2.out",
-
       onComplete: () => {
         audio.pause();
       },
@@ -187,16 +205,15 @@ export default function Hero() {
         setSoundOn(true);
         soundOnRef.current = true;
 
-        gsap.to(audio, {
+        volumeTweenRef.current = gsap.to(audio, {
           volume: TARGET_VOLUME,
           duration: 1.8,
           ease: "power2.out",
         });
       } catch {
         /*
-         * Normal browser behaviour.
-         * Most browsers block audible autoplay until the
-         * visitor interacts with the page.
+         * Browsers commonly block audible autoplay
+         * until the visitor interacts with the page.
          */
         if (!cancelled) {
           setSoundOn(false);
@@ -211,14 +228,12 @@ export default function Hero() {
       cancelled = true;
 
       volumeTweenRef.current?.kill();
-
       audio.pause();
     };
   }, []);
 
   /* =========================================================
      HERO VISIBILITY
-     FADE MUSIC OUT WHEN LEAVING HERO
   ========================================================= */
 
   useEffect(() => {
@@ -269,7 +284,6 @@ export default function Hero() {
         volume: 0,
         duration: 0.65,
         ease: "power2.out",
-
         onComplete: () => {
           audio.pause();
         },
@@ -316,45 +330,126 @@ export default function Hero() {
       />
 
       {/* =====================================================
-          BACKGROUND
+          BACKGROUND ATMOSPHERE
       ====================================================== */}
 
       <div className="absolute inset-0 z-0">
         {/* Main green atmosphere */}
 
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_68%_48%,rgba(18,63,50,0.88),transparent_42%)]" />
+        <div
+          className="
+            absolute
+            inset-0
+            bg-[radial-gradient(circle_at_69%_46%,rgba(18,63,50,0.92),transparent_43%)]
+          "
+        />
 
-        {/* Gold glow */}
+        {/* Gold atmosphere */}
 
-        <div className="absolute left-[7%] top-[18%] h-[420px] w-[420px] rounded-full bg-[#c6a15b]/[0.04] blur-[130px]" />
+        <div
+          className="
+            absolute
+            left-[4%]
+            top-[14%]
+            h-[450px]
+            w-[450px]
+            rounded-full
+            bg-[#c6a15b]/[0.045]
+            blur-[140px]
+          "
+        />
 
-        {/* Green glow on portrait side */}
+        {/* Portrait green glow */}
 
-        <div className="absolute right-[-10%] top-[12%] h-[650px] w-[650px] rounded-full bg-[#174c3d]/25 blur-[150px] sm:right-[0%]" />
+        <div
+          className="
+            absolute
+            right-[-10%]
+            top-[10%]
+            h-[700px]
+            w-[700px]
+            rounded-full
+            bg-[#174c3d]/30
+            blur-[160px]
+
+            sm:right-[-2%]
+          "
+        />
+
+        {/* Lower atmosphere */}
+
+        <div
+          className="
+            absolute
+            bottom-[-25%]
+            left-[35%]
+            h-[500px]
+            w-[700px]
+            rounded-full
+            bg-[#123f32]/25
+            blur-[160px]
+          "
+        />
 
         {/* Subtle grid */}
 
-        <div className="absolute inset-0 opacity-[0.04] [background-image:linear-gradient(rgba(255,255,255,.5)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.5)_1px,transparent_1px)] [background-size:80px_80px]" />
+        <div
+          className="
+            absolute
+            inset-0
+            opacity-[0.035]
+            [background-image:linear-gradient(rgba(255,255,255,.5)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.5)_1px,transparent_1px)]
+            [background-size:80px_80px]
+          "
+        />
 
-        {/* Overall left darkness */}
+        {/* Left grounding */}
 
-        <div className="absolute inset-0 bg-gradient-to-r from-[#090b0a] via-[#090b0a]/10 to-transparent" />
+        <div
+          className="
+            absolute
+            inset-0
+            bg-gradient-to-r
+            from-[#090b0a]
+            via-[#090b0a]/10
+            to-transparent
+          "
+        />
       </div>
 
       {/* =====================================================
-          GIANT BACKGROUND YEAR
+          GIANT 2026
       ====================================================== */}
 
       <div
         data-hero-year
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-[45%] z-[1] -translate-x-1/2 -translate-y-1/2 select-none lg:left-[48%] lg:top-[48%]"
+        className="
+          pointer-events-none
+          absolute
+          left-1/2
+          top-[44%]
+          z-[1]
+          -translate-x-1/2
+          -translate-y-1/2
+          select-none
+
+          lg:left-[48%]
+          lg:top-[48%]
+        "
       >
         <span
-          className="whitespace-nowrap font-display text-[clamp(10rem,38vw,39rem)] font-semibold leading-none tracking-[-0.08em] text-transparent"
+          className="
+            whitespace-nowrap
+            font-display
+            text-[clamp(10rem,38vw,39rem)]
+            font-semibold
+            leading-none
+            tracking-[-0.08em]
+            text-transparent
+          "
           style={{
-            WebkitTextStroke:
-              "1px rgba(198,161,91,.16)",
+            WebkitTextStroke: "1px rgba(198,161,91,.17)",
           }}
         >
           2026
@@ -362,7 +457,7 @@ export default function Hero() {
       </div>
 
       {/* =====================================================
-          ABDULHAFIS PORTRAIT
+          PORTRAIT
       ====================================================== */}
 
       <div
@@ -390,7 +485,7 @@ export default function Hero() {
           lg:w-[min(58vw,900px)]
         "
       >
-        {/* Green glow directly behind portrait */}
+        {/* Green halo */}
 
         <div
           className="
@@ -410,9 +505,21 @@ export default function Hero() {
           "
         />
 
-        {/* Subtle gold warmth */}
+        {/* Gold warmth */}
 
-        <div className="absolute bottom-[12%] left-[55%] h-[40%] w-[55%] -translate-x-1/2 rounded-full bg-[#c6a15b]/[0.045] blur-[100px]" />
+        <div
+          className="
+            absolute
+            bottom-[12%]
+            left-[55%]
+            h-[40%]
+            w-[55%]
+            -translate-x-1/2
+            rounded-full
+            bg-[#c6a15b]/[0.055]
+            blur-[100px]
+          "
+        />
 
         {/* Actual portrait */}
 
@@ -449,14 +556,11 @@ export default function Hero() {
       </div>
 
       {/* =====================================================
-          HERO / PORTRAIT BLENDING
+          PORTRAIT / BACKGROUND BLENDING
       ====================================================== */}
 
       <div className="pointer-events-none absolute inset-0 z-20">
-        {/* =============================================
-            DESKTOP LEFT CLOSING GRADIENT
-            Reduced spread
-        ============================================= */}
+        {/* Desktop left gradient */}
 
         <div
           className="absolute inset-0 hidden lg:block"
@@ -465,21 +569,19 @@ export default function Hero() {
               linear-gradient(
                 90deg,
                 #090b0a 0%,
-                #090b0a 18%,
-                rgba(9,11,10,0.96) 23%,
-                rgba(9,11,10,0.78) 29%,
-                rgba(9,11,10,0.52) 35%,
-                rgba(9,11,10,0.28) 41%,
-                rgba(9,11,10,0.10) 47%,
-                transparent 53%
+                #090b0a 16%,
+                rgba(9,11,10,0.96) 21%,
+                rgba(9,11,10,0.80) 27%,
+                rgba(9,11,10,0.55) 33%,
+                rgba(9,11,10,0.30) 39%,
+                rgba(9,11,10,0.12) 45%,
+                transparent 51%
               )
             `,
           }}
         />
 
-        {/* =============================================
-            TABLET LEFT FADE
-        ============================================= */}
+        {/* Tablet left fade */}
 
         <div
           className="
@@ -487,7 +589,7 @@ export default function Hero() {
             inset-y-0
             left-0
             hidden
-            w-[46%]
+            w-[45%]
             bg-gradient-to-r
             from-[#090b0a]
             via-[#090b0a]/55
@@ -498,9 +600,7 @@ export default function Hero() {
           "
         />
 
-        {/* =============================================
-            MOBILE LEFT FADE
-        ============================================= */}
+        {/* Mobile left fade */}
 
         <div
           className="
@@ -518,21 +618,18 @@ export default function Hero() {
           "
         />
 
-        {/* =============================================
-            BOTTOM PORTRAIT FADE
-        ============================================= */}
+        {/* Bottom portrait fade */}
 
         <div
           className="
             absolute
             inset-x-0
             bottom-0
-
-            h-[42%]
+            h-[43%]
 
             bg-gradient-to-t
             from-[#090b0a]
-            via-[#090b0a]/65
+            via-[#090b0a]/68
             to-transparent
 
             sm:h-[40%]
@@ -541,16 +638,13 @@ export default function Hero() {
           "
         />
 
-        {/* =============================================
-            RIGHT EDGE FADE
-        ============================================= */}
+        {/* Right edge fade */}
 
         <div
           className="
             absolute
             bottom-0
             right-0
-
             h-[72%]
             w-[7%]
 
@@ -558,17 +652,28 @@ export default function Hero() {
             from-[#090b0a]/55
             to-transparent
 
-            lg:w-[12%]
+            lg:w-[10%]
           "
         />
 
-        {/* Soft center transition */}
+        {/* Center transition */}
 
-        <div className="absolute bottom-[10%] left-[45%] h-[38%] w-[32%] rounded-full bg-[#123f32]/15 blur-[90px]" />
+        <div
+          className="
+            absolute
+            bottom-[10%]
+            left-[45%]
+            h-[38%]
+            w-[32%]
+            rounded-full
+            bg-[#123f32]/15
+            blur-[90px]
+          "
+        />
       </div>
 
       {/* =====================================================
-          EDITION
+          EDITION BADGE
       ====================================================== */}
 
       <div
@@ -576,7 +681,7 @@ export default function Hero() {
         className="
           absolute
           left-1/2
-          top-[105px]
+          top-[104px]
           z-30
           -translate-x-1/2
           whitespace-nowrap
@@ -586,18 +691,20 @@ export default function Hero() {
         "
       >
         <div className="flex items-center gap-3 sm:gap-4">
-          <span className="h-px w-6 bg-[#c6a15b] sm:w-9" />
+          <span className="h-px w-5 bg-[#dfc27b]/55 sm:w-8" />
 
-          <span className="text-[0.52rem] font-bold uppercase tracking-[0.24em] text-[#dfc27b] sm:text-[0.58rem] sm:tracking-[0.28em]">
-            14th Edition · 2026
-          </span>
+          <p className="text-[0.58rem] font-bold uppercase tracking-[0.24em] text-[#dfc27b] sm:text-[0.64rem]">
+            14th Edition
+            <span className="mx-2 text-white/30">·</span>
+            2026
+          </p>
 
-          <span className="h-px w-6 bg-[#c6a15b] sm:w-9" />
+          <span className="h-px w-5 bg-[#dfc27b]/55 sm:w-8" />
         </div>
       </div>
 
       {/* =====================================================
-          LEFT — AWARD TITLE
+          LEFT — MAIN AWARD IDENTITY
       ====================================================== */}
 
       <div
@@ -605,67 +712,131 @@ export default function Hero() {
         className="
           absolute
           left-[var(--page-padding)]
-          top-[20%]
+          top-[17%]
           z-30
-          max-w-[650px]
+          max-w-[790px]
 
-          sm:top-[23%]
-          md:top-[27%]
-          lg:top-[31%]
+          sm:top-[19%]
+          md:top-[21%]
+          lg:top-[22%]
+          xl:top-[23%]
         "
       >
-        <p className="mb-3 text-[0.55rem] font-semibold uppercase tracking-[0.23em] text-white/45 sm:mb-4 sm:text-[0.62rem] sm:tracking-[0.25em]">
-          Lagos State
-        </p>
+        {/* LAGOS STATE */}
+
+        <div
+          data-title-label
+          className="mb-5 flex items-center gap-3 sm:mb-6"
+        >
+          <span className="h-[2px] w-8 bg-[#dfc27b] sm:w-10" />
+
+          <p
+            className="
+              text-[0.66rem]
+              font-bold
+              uppercase
+              tracking-[0.24em]
+              text-[#dfc27b]
+
+              sm:text-[0.72rem]
+            "
+          >
+            Lagos State
+          </p>
+        </div>
+
+        {/* MAIN AWARD TITLE */}
 
         <h1
           className="
             font-display
-            text-[clamp(3.25rem,14vw,8.4rem)]
-            font-medium
+            text-[clamp(3.7rem,14vw,9rem)]
+            font-bold
             leading-[0.78]
-            tracking-[-0.055em]
+            tracking-[-0.06em]
+            text-white
 
-            sm:text-[clamp(4rem,11vw,8.4rem)]
-            lg:text-[clamp(3.9rem,7.6vw,8.4rem)]
+            drop-shadow-[0_10px_40px_rgba(0,0,0,.32)]
+
+            sm:text-[clamp(4.5rem,11vw,9rem)]
+            lg:text-[clamp(4.5rem,7.8vw,9rem)]
           "
         >
-          Man of
-          <br />
-          the Year
+          <span className="block overflow-hidden pb-[0.05em]">
+            <span data-title-line className="block">
+              Man of the
+            </span>
+          </span>
+
+          <span className="block overflow-hidden pb-[0.08em]">
+            <span
+              data-title-line
+              className="block text-[#f5f2e9]"
+            >
+              Year
+            </span>
+          </span>
         </h1>
 
-        <p
-          className="
-            mt-5
-            max-w-[270px]
-            text-[0.68rem]
-            leading-5
-            text-white/50
+        {/* AWARD DESCRIPTOR */}
 
-            sm:max-w-[320px]
-            sm:text-[0.72rem]
-            sm:leading-6
-
-            lg:mt-6
-            lg:max-w-[330px]
-            lg:text-[0.75rem]
-          "
+        <div
+          data-title-line
+          className="mt-3 flex items-center gap-4 sm:mt-4 lg:mt-5"
         >
-          Celebrating leadership, service, impact and the
-          individuals helping shape the future of Lagos.
-        </p>
+          <span className="h-[2px] w-10 bg-[#dfc27b] sm:w-12" />
+
+          <span
+            className="
+              font-display
+              text-[1.15rem]
+              font-semibold
+              italic
+              tracking-[0.04em]
+              text-[#dfc27b]
+
+              sm:text-[1.3rem]
+              lg:text-[1.4rem]
+            "
+          >
+            Award
+          </span>
+        </div>
+
+        {/* SUPPORTING COPY */}
+
+        <div data-title-copy className="mt-6 sm:mt-7 lg:mt-8">
+          <p
+            className="
+              max-w-[320px]
+              text-[0.86rem]
+              font-medium
+              leading-[1.7]
+              text-white/78
+
+              sm:max-w-[390px]
+              sm:text-[0.94rem]
+              sm:leading-[1.75]
+
+              lg:max-w-[430px]
+              lg:text-[1rem]
+            "
+          >
+            Celebrating leadership, service, impact and the
+            individuals helping shape the future of Lagos.
+          </p>
+        </div>
       </div>
 
       {/* =====================================================
-          WINNER DETAILS
+          2026 AWARDEE DETAILS
       ====================================================== */}
 
       <div
         data-winner-details
         className="
           absolute
-          bottom-[4%]
+          bottom-[3.5%]
           left-[var(--page-padding)]
           right-[var(--page-padding)]
           z-30
@@ -673,36 +844,49 @@ export default function Hero() {
           sm:bottom-[5%]
           sm:left-auto
           sm:right-[var(--page-padding)]
-          sm:w-[360px]
+          sm:w-[390px]
 
-          lg:bottom-[7%]
-          lg:w-[370px]
+          lg:bottom-[6.5%]
+          lg:w-[410px]
+
+          xl:w-[440px]
         "
       >
-        {/* Honouree label */}
+        {/* Awardee label */}
 
-        <div className="mb-3 flex items-center gap-3 sm:mb-4">
-          <span className="h-px w-7 bg-[#c6a15b] sm:w-8" />
+        <div className="mb-4 flex items-center gap-3 sm:mb-5">
+          <span className="h-[2px] w-8 bg-[#dfc27b] sm:w-10" />
 
-          <p className="text-[0.52rem] font-bold uppercase tracking-[0.22em] text-[#dfc27b] sm:text-[0.58rem] sm:tracking-[0.24em]">
-            2026 Honouree
+          <p
+            className="
+              text-[0.62rem]
+              font-bold
+              uppercase
+              tracking-[0.22em]
+              text-[#dfc27b]
+
+              sm:text-[0.68rem]
+            "
+          >
+            2026 Awardee
           </p>
         </div>
 
-        {/* Winner name */}
+        {/* Awardee name */}
 
         <h2
           className="
             font-display
-            text-[clamp(2rem,8.5vw,3.8rem)]
-            font-medium
-            leading-[0.88]
-            tracking-[-0.035em]
+            text-[clamp(2.15rem,8.5vw,4rem)]
+            font-semibold
+            leading-[0.9]
+            tracking-[-0.038em]
             text-white
-            drop-shadow-[0_4px_25px_rgba(0,0,0,.95)]
 
-            sm:text-[clamp(2.3rem,6vw,3.8rem)]
-            lg:text-[clamp(2.3rem,3.3vw,3.8rem)]
+            drop-shadow-[0_5px_28px_rgba(0,0,0,.95)]
+
+            sm:text-[clamp(2.5rem,6vw,4rem)]
+            lg:text-[clamp(2.6rem,3.5vw,4rem)]
           "
         >
           Engr. Abdulhafis
@@ -712,13 +896,39 @@ export default function Hero() {
 
         {/* Qualification */}
 
-        <p className="mt-2 text-[0.56rem] font-semibold uppercase tracking-[0.18em] text-white/70 sm:mt-3 sm:text-[0.62rem]">
+        <p
+          className="
+            mt-3
+            text-[0.68rem]
+            font-bold
+            uppercase
+            tracking-[0.2em]
+            text-[#dfc27b]
+
+            sm:mt-4
+            sm:text-[0.72rem]
+          "
+        >
           FNSE
         </p>
 
         {/* Role */}
 
-        <p className="mt-3 max-w-[260px] text-[0.62rem] leading-[1.6] text-white/60 sm:mt-4 sm:max-w-[290px] sm:text-[0.68rem] sm:leading-5">
+        <p
+          className="
+            mt-4
+            max-w-[300px]
+            text-[0.8rem]
+            font-medium
+            leading-[1.65]
+            text-white/78
+
+            sm:max-w-[330px]
+            sm:text-[0.88rem]
+
+            lg:text-[0.92rem]
+          "
+        >
           Permanent Secretary
           <br />
           Lagos State Ministry of Housing
@@ -726,49 +936,77 @@ export default function Hero() {
 
         {/* CTA */}
 
-        <div className="mt-4 sm:mt-6">
+        <div className="mt-5 sm:mt-7">
           <Link
             href="/editions/2026"
             className="
               group
               inline-flex
               items-center
-              gap-3
-              text-[0.56rem]
-              font-bold
-              uppercase
-              tracking-[0.18em]
-              text-white
-
-              sm:text-[0.62rem]
+              gap-4
             "
           >
-            Explore 2026
+            <span
+              className="
+                relative
+                text-[0.64rem]
+                font-bold
+                uppercase
+                tracking-[0.18em]
+                text-white/90
+
+                after:absolute
+                after:-bottom-1
+                after:left-0
+                after:h-px
+                after:w-full
+                after:origin-left
+                after:scale-x-0
+                after:bg-[#dfc27b]
+                after:transition-transform
+                after:duration-500
+
+                group-hover:text-[#dfc27b]
+                group-hover:after:scale-x-100
+
+                sm:text-[0.68rem]
+              "
+            >
+              Explore 2026
+            </span>
 
             <span
               className="
                 flex
-                h-8
-                w-8
+                h-9
+                w-9
                 items-center
                 justify-center
                 rounded-full
                 border
-                border-[#c6a15b]/60
+                border-[#dfc27b]/55
+                text-[#dfc27b]
                 transition-all
-                duration-300
+                duration-500
 
-                group-hover:border-[#c6a15b]
-                group-hover:bg-[#c6a15b]
-                group-hover:text-black
+                group-hover:border-[#dfc27b]
+                group-hover:bg-[#dfc27b]
+                group-hover:text-[#090b0a]
 
-                sm:h-9
-                sm:w-9
+                sm:h-10
+                sm:w-10
               "
             >
               <ArrowUpRight
-                size={13}
-                className="transition-transform duration-300 group-hover:translate-x-[2px] group-hover:-translate-y-[2px]"
+                size={14}
+                strokeWidth={1.7}
+                className="
+                  transition-transform
+                  duration-300
+
+                  group-hover:translate-x-[2px]
+                  group-hover:-translate-y-[2px]
+                "
               />
             </span>
           </Link>
@@ -790,36 +1028,74 @@ export default function Hero() {
           z-30
           hidden
           items-center
-          gap-3
+          gap-4
+
           lg:flex
         "
       >
         <span
           className="
             flex
-            h-9
-            w-9
+            h-10
+            w-10
             items-center
             justify-center
             rounded-full
             border
-            border-white/20
+            border-white/25
+            text-white/75
             transition-all
-            duration-300
+            duration-500
 
-            group-hover:border-[#c6a15b]/60
-            group-hover:bg-[#c6a15b]/[0.05]
+            group-hover:border-[#dfc27b]/70
+            group-hover:bg-[#dfc27b]/10
+            group-hover:text-[#dfc27b]
           "
         >
           <ArrowDown
-            size={13}
-            className="transition-transform duration-300 group-hover:translate-y-1"
+            size={14}
+            strokeWidth={1.7}
+            className="
+              transition-transform
+              duration-300
+              group-hover:translate-y-1
+            "
           />
         </span>
 
-        <span className="text-[0.55rem] font-semibold uppercase tracking-[0.2em] text-white/40 transition-colors duration-300 group-hover:text-white/70">
-          Discover LASMAYA
-        </span>
+        <div>
+          <span
+            className="
+              block
+              text-[0.62rem]
+              font-bold
+              uppercase
+              tracking-[0.2em]
+              text-white/65
+              transition-colors
+              duration-300
+
+              group-hover:text-white
+            "
+          >
+            Discover LASMAYA
+          </span>
+
+          <span
+            className="
+              mt-1
+              hidden
+              text-[0.54rem]
+              font-medium
+              tracking-[0.08em]
+              text-white/30
+
+              xl:block
+            "
+          >
+            Explore the story behind the award
+          </span>
+        </div>
       </a>
 
       {/* =====================================================
@@ -840,22 +1116,23 @@ export default function Hero() {
           group
           absolute
           right-[var(--page-padding)]
-          top-[47%]
+          top-[46%]
           z-40
           flex
           -translate-y-1/2
           items-center
           gap-3
 
-          sm:top-[48%]
+          sm:top-[47%]
+          lg:top-[48%]
         "
       >
-        {/* TEXT */}
+        {/* Sound text */}
 
         <div className="hidden text-right md:block">
           <p
             className={`
-              text-[0.43rem]
+              text-[0.55rem]
               font-bold
               uppercase
               tracking-[0.2em]
@@ -864,20 +1141,29 @@ export default function Hero() {
 
               ${
                 soundOn
-                  ? "text-[#dfc27b]/80"
-                  : "text-white/30"
+                  ? "text-[#dfc27b]"
+                  : "text-white/55"
               }
             `}
           >
             {soundOn ? "Sound On" : "Sound Off"}
           </p>
 
-          <p className="mt-1 text-[0.4rem] uppercase tracking-[0.14em] text-white/20">
+          <p
+            className="
+              mt-1
+              text-[0.5rem]
+              font-medium
+              uppercase
+              tracking-[0.13em]
+              text-white/38
+            "
+          >
             Awa Instrumental
           </p>
         </div>
 
-        {/* CIRCLE */}
+        {/* Sound circle */}
 
         <span
           className={`
@@ -895,11 +1181,11 @@ export default function Hero() {
 
             ${
               soundOn
-                ? "border-[#dfc27b]/50 bg-[#dfc27b]/10 text-[#dfc27b]"
-                : "border-white/15 bg-[#090b0a]/20 text-white/45"
+                ? "border-[#dfc27b]/60 bg-[#dfc27b]/10 text-[#dfc27b]"
+                : "border-white/20 bg-[#090b0a]/30 text-white/65"
             }
 
-            group-hover:border-[#dfc27b]/70
+            group-hover:border-[#dfc27b]/80
             group-hover:bg-[#dfc27b]/10
             group-hover:text-[#dfc27b]
 
@@ -907,22 +1193,41 @@ export default function Hero() {
             sm:w-12
           `}
         >
-          {/* OUTER ACTIVE RING */}
+          {/* Active ring */}
 
           {soundOn && (
-            <span className="absolute inset-[-5px] rounded-full border border-[#dfc27b]/15" />
+            <span
+              className="
+                absolute
+                inset-[-5px]
+                rounded-full
+                border
+                border-[#dfc27b]/20
+              "
+            />
           )}
 
-          {/* SMALL PLAYING INDICATOR */}
+          {/* Active dot */}
 
           {soundOn && (
-            <span className="absolute right-[1px] top-[1px] h-[5px] w-[5px] rounded-full bg-[#dfc27b] shadow-[0_0_10px_rgba(223,194,123,.9)]" />
+            <span
+              className="
+                absolute
+                right-[1px]
+                top-[1px]
+                h-[5px]
+                w-[5px]
+                rounded-full
+                bg-[#dfc27b]
+                shadow-[0_0_10px_rgba(223,194,123,.9)]
+              "
+            />
           )}
 
           {soundOn ? (
-            <Volume2 size={15} strokeWidth={1.5} />
+            <Volume2 size={16} strokeWidth={1.6} />
           ) : (
-            <VolumeX size={15} strokeWidth={1.5} />
+            <VolumeX size={16} strokeWidth={1.6} />
           )}
         </span>
       </button>
@@ -939,11 +1244,34 @@ export default function Hero() {
           top-0
           z-[21]
           h-[18%]
+
           bg-gradient-to-b
-          from-[#090b0a]/60
+          from-[#090b0a]/65
           to-transparent
 
           lg:hidden
+        "
+      />
+
+      {/* =====================================================
+          VERY SUBTLE BOTTOM BORDER
+      ====================================================== */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          bottom-0
+          left-1/2
+          z-30
+          h-px
+          w-[92%]
+          -translate-x-1/2
+
+          bg-gradient-to-r
+          from-transparent
+          via-[#dfc27b]/20
+          to-transparent
         "
       />
     </section>

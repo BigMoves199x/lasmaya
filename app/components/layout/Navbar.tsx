@@ -686,46 +686,10 @@ export default function Navbar() {
                 hover:bg-[#c6a15b]/[0.09]
               "
             >
-              <div className="flex items-center gap-3">
-                <span className="relative flex h-[7px] w-[7px]">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#dfc27b] opacity-40" />
-
-                  <span className="relative inline-flex h-[7px] w-[7px] rounded-full bg-[#dfc27b]" />
-                </span>
-
-                <div>
-                  <div className="text-[0.5rem] font-bold uppercase tracking-[0.22em] text-[#c6a15b]/60">
-                    Current Edition
-                  </div>
-
-                  <div className="mt-1 font-display text-[1.25rem] font-medium text-[#f5f2e9]">
-                    LASMAYA 2026
-                  </div>
-                </div>
-              </div>
-
-              <ArrowUpRight
-                size={18}
-                strokeWidth={1.4}
-                className="
-                  text-[#dfc27b]
-                  transition-transform
-                  duration-300
-                  group-hover:translate-x-1
-                  group-hover:-translate-y-1
-                "
-              />
+              
             </Link>
 
-            <div className="mt-6 flex items-center justify-between">
-              <span className="text-[0.45rem] font-semibold uppercase tracking-[0.18em] text-white/25">
-                Lagos State Man of the Year Award
-              </span>
-
-              <span className="text-[0.45rem] font-semibold uppercase tracking-[0.18em] text-white/25">
-                14th Edition
-              </span>
-            </div>
+            
           </div>
         </div>
       </div>

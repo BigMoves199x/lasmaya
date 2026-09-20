@@ -13,6 +13,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+/* =========================================================
+   TYPES
+========================================================= */
+
 type NewsCategory =
   | "All"
   | "2026 Edition"
@@ -30,6 +34,10 @@ type Article = {
   featured?: boolean;
 };
 
+/* =========================================================
+   CATEGORIES
+========================================================= */
+
 const categories: NewsCategory[] = [
   "All",
   "2026 Edition",
@@ -38,15 +46,19 @@ const categories: NewsCategory[] = [
   "Award History",
 ];
 
+/* =========================================================
+   ARTICLES
+========================================================= */
+
 const articles: Article[] = [
   {
-    slug: "abdulhafis-toriola-emerges-2026-honouree",
+    slug: "abdulhafis-toriola-emerges-2026-awardee",
     category: "2026 Edition",
     date: "September 2026",
     title:
-      "Engr. Abdulhafis Gbolahan Toriola emerges as 2026 LASMAYA honouree",
+      "Engr. Abdulhafis Gbolahan Toriola emerges as 2026 LASMAYA Awardee",
     excerpt:
-      "The 14th Edition of the Lagos State Man of the Year Award culminated in the recognition of Engr. Abdulhafis Gbolahan Toriola, FNSE, following the 2026 public voting process.",
+      "The 14th Edition of the Lagos State Man of the Year Award culminated in the recognition of Engr. Abdulhafis Gbolahan Toriola, FNSE, as the 2026 Awardee following the public voting process.",
     image: "/images/editions/2026/winner/abdulhafis.png",
     featured: true,
   },
@@ -65,7 +77,7 @@ const articles: Article[] = [
     date: "2026",
     title: "Meet the ten nominees of the 2026 LASMAYA edition",
     excerpt:
-      "The 14th Edition brought together individuals representing different professional backgrounds and areas of contribution across Lagos.",
+      "The 14th Edition brought together ten distinguished nominees representing different professional backgrounds and areas of contribution across Lagos.",
     image: "/images/news/2026-nominees.jpg",
   },
   {
@@ -74,7 +86,7 @@ const articles: Article[] = [
     date: "Archive",
     title: "The LASMAYA story: recognition and impact since 2008",
     excerpt:
-      "A look at the continuing story of the Lagos State Man of the Year Award and the people recognised across its editions.",
+      "A look at the continuing story of the Lagos State Man of the Year Award and the Awardees recognised across its editions since 2008.",
     image: "/images/news/lasmaya-history.jpg",
   },
   {
@@ -83,7 +95,7 @@ const articles: Article[] = [
     date: "2026",
     title: "Inside the results of the 2026 public voting process",
     excerpt:
-      "The public voting process concluded with Abdulhafis Toriola recording the highest reported vote total in the 2026 nominee field.",
+      "The public voting process concluded with Engr. Abdulhafis Gbolahan Toriola, FNSE, recording the highest reported vote total in the 2026 nominee field and emerging as the 2026 Awardee.",
     image: "/images/news/2026-results.jpg",
   },
   {
@@ -97,14 +109,28 @@ const articles: Article[] = [
   },
 ];
 
+/* =========================================================
+   NEWS PAGE
+========================================================= */
+
 export default function NewsPage() {
   const pageRef = useRef<HTMLElement>(null);
+
   const [activeCategory, setActiveCategory] =
     useState<NewsCategory>("All");
+
   const [search, setSearch] = useState("");
+
+  /* =======================================================
+     FEATURED ARTICLE
+  ======================================================= */
 
   const featuredArticle =
     articles.find((article) => article.featured) ?? articles[0];
+
+  /* =======================================================
+     FILTER ARTICLES
+  ======================================================= */
 
   const filteredArticles = useMemo(() => {
     return articles
@@ -126,18 +152,26 @@ export default function NewsPage() {
       });
   }, [activeCategory, search]);
 
+  /* =======================================================
+     GSAP
+  ======================================================= */
+
   useLayoutEffect(() => {
     const page = pageRef.current;
 
     if (!page) return;
 
     const context = gsap.context(() => {
+      /* HERO LABEL */
+
       gsap.from("[data-news-label]", {
         y: 20,
         opacity: 0,
         duration: 0.7,
         ease: "power3.out",
       });
+
+      /* HERO HEADING */
 
       gsap.from("[data-news-heading] .news-line", {
         yPercent: 110,
@@ -147,6 +181,8 @@ export default function NewsPage() {
         ease: "power4.out",
       });
 
+      /* HERO INTRO */
+
       gsap.from("[data-news-intro]", {
         y: 30,
         opacity: 0,
@@ -154,6 +190,8 @@ export default function NewsPage() {
         duration: 0.9,
         ease: "power3.out",
       });
+
+      /* FEATURED STORY */
 
       gsap.from("[data-featured-story]", {
         scrollTrigger: {
@@ -166,6 +204,8 @@ export default function NewsPage() {
         ease: "power3.out",
       });
 
+      /* FILTER */
+
       gsap.from("[data-news-filter]", {
         scrollTrigger: {
           trigger: "[data-news-filter]",
@@ -176,6 +216,8 @@ export default function NewsPage() {
         duration: 0.75,
         ease: "power3.out",
       });
+
+      /* ARTICLE CARDS */
 
       gsap.from("[data-news-card]", {
         scrollTrigger: {
@@ -188,6 +230,8 @@ export default function NewsPage() {
         duration: 0.8,
         ease: "power3.out",
       });
+
+      /* LARGE BACKGROUND WORD */
 
       gsap.to("[data-editorial-word]", {
         xPercent: -8,
@@ -224,7 +268,7 @@ export default function NewsPage() {
           <div className="absolute inset-0 opacity-[0.025] [background-image:linear-gradient(rgba(255,255,255,.5)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.5)_1px,transparent_1px)] [background-size:100px_100px]" />
         </div>
 
-        {/* LARGE WORD */}
+        {/* LARGE EDITORIAL WORD */}
 
         <div
           data-editorial-word
@@ -303,7 +347,7 @@ export default function NewsPage() {
 
               <p className="max-w-[470px] text-[0.95rem] leading-[1.85] text-white/55">
                 Follow announcements, nominee stories, award results,
-                honouree profiles and moments from across the Lagos State
+                Awardee profiles and moments from across the Lagos State
                 Man of the Year Award.
               </p>
 
@@ -453,6 +497,7 @@ export default function NewsPage() {
               <h2 className="font-display text-[clamp(3.3rem,6.5vw,7rem)] font-medium leading-[0.86] tracking-[-0.055em]">
                 From across
                 <br />
+
                 <span className="text-[#102e25]/25">
                   LASMAYA.
                 </span>
@@ -461,8 +506,8 @@ export default function NewsPage() {
 
             <p className="max-w-[450px] text-[0.8rem] leading-[1.85] text-[#26352f]/55">
               Explore news from current and previous editions, including
-              nominee announcements, public voting, results, profiles and
-              stories from the LASMAYA archive.
+              nominee announcements, public voting, results, Awardee
+              profiles and stories from the LASMAYA archive.
             </p>
           </div>
 
@@ -498,7 +543,6 @@ export default function NewsPage() {
                         tracking-[0.16em]
                         transition-all
                         duration-300
-
                         ${
                           active
                             ? "border-[#102e25] bg-[#102e25] text-[#f5f2e9]"
@@ -559,7 +603,6 @@ export default function NewsPage() {
                     relative
                     overflow-hidden
                     bg-[#e7e1d3]
-
                     ${
                       index % 4 === 0
                         ? "aspect-[4/5]"
@@ -602,7 +645,6 @@ export default function NewsPage() {
                       opacity-0
                       transition-all
                       duration-500
-
                       group-hover:translate-y-0
                       group-hover:opacity-100
                     "
@@ -699,6 +741,7 @@ export default function NewsPage() {
               <h2 className="max-w-[900px] font-display text-[clamp(3rem,6vw,6.5rem)] leading-[0.9] tracking-[-0.055em]">
                 Every edition leaves
                 <br />
+
                 <span className="text-[#dfc27b]">
                   a story behind.
                 </span>
@@ -706,7 +749,7 @@ export default function NewsPage() {
 
               <p className="mt-9 max-w-[620px] text-[0.84rem] leading-[1.9] text-white/45">
                 The LASMAYA news archive will preserve announcements,
-                nominees, honourees, ceremonies and stories from across the
+                nominees, Awardees, ceremonies and stories from across the
                 award&apos;s continuing history.
               </p>
 
