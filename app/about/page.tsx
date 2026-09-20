@@ -15,81 +15,93 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+/* =========================================================
+   CRITERIA
+========================================================= */
+
 const criteria = [
   {
     number: "01",
     title: "Leadership",
-    text: "Exemplary leadership qualities demonstrated through responsibility, influence and contribution.",
+    text: "Leadership qualities, responsibility, influence and meaningful contribution form part of the considerations surrounding LASMAYA recognition.",
   },
   {
     number: "02",
     title: "Integrity",
-    text: "Consistent moral standards and integrity form part of the considerations reported in the selection process.",
+    text: "Integrity, honour and strong moral standards are central to the kind of role models LASMAYA seeks to recognise and project.",
   },
   {
     number: "03",
     title: "Achievement",
-    text: "Outstanding personal and professional achievements help distinguish prospective nominees.",
+    text: "Personal and professional achievements help distinguish individuals whose work has created meaningful impact.",
   },
   {
     number: "04",
     title: "Service",
-    text: "The process considers meaningful and selfless service to Lagos, society and humanity.",
+    text: "Meaningful service and contribution to Lagos, society and humanity remain important elements of recognition.",
   },
   {
     number: "05",
-    title: "Public Opinion",
-    text: "Public participation has remained an important part of determining the eventual honouree.",
+    title: "Public Participation",
+    text: "Public participation forms an important part of the process through which the eventual Awardee emerges.",
   },
 ];
+
+/* =========================================================
+   SELECTED MILESTONES
+========================================================= */
 
 const milestones = [
   {
     year: "2008",
     label: "The Beginning",
-    text: "Published accounts trace the Lagos State Man of the Year Award to 2008.",
+    text: "LASMAYA began its continuing journey as a platform created to recognise excellence and project genuine role models in Lagos State.",
   },
   {
     year: "2009",
-    label: "Recognition Across Gender",
-    text: "Princess Victoria Adejoke Orelope-Adefulire is documented as the 2009 recipient, demonstrating early in the award's history that gender was not a barrier to recognition.",
+    label: "Recognition Continues",
+    text: "Princess Victoria Adejoke Orelope-Adefulire is documented as the 2009 recipient of the Lagos State Man of the Year Award.",
   },
   {
     year: "2013",
-    label: "Public Service & Innovation",
+    label: "Public Service",
     text: "Obafemi Hamzat received the Lagos State Man of the Year recognition in 2013.",
   },
   {
     year: "2014",
     label: "Exemplary Service",
-    text: "George Noah emerged as the 2014 recipient after polling the highest number of votes.",
+    text: "George Noah emerged as the 2014 recipient after the public participation process.",
   },
   {
     year: "2017",
-    label: "Seventh Edition",
-    text: "Dr. Adebola Ismail Akindele emerged as the 2017 Man of the Year at the seventh edition of the conferment.",
+    label: "Recognition & Achievement",
+    text: "Dr. Adebola Ismail Akindele emerged as a recipient of the Lagos State Man of the Year Award in 2017.",
   },
   {
     year: "2018",
-    label: "Tenth Edition",
-    text: "Dr. Abdul-Hakeem Abdul-Lateef emerged as the 2018 recipient. Contemporary reporting identified the ceremony as LASMAYA's 10th edition.",
+    label: "A Continuing Legacy",
+    text: "Dr. Abdul-Hakeem Abdul-Lateef emerged as the 2018 recipient as LASMAYA continued its recognition journey.",
   },
   {
     year: "2021",
     label: "Recognition Continues",
-    text: "Dr. Aderemi Emmanuel Awode was honoured following nomination, assessment and public participation.",
+    text: "Dr. Aderemi Emmanuel Awode received LASMAYA recognition following the edition's nomination, assessment and public participation process.",
   },
   {
     year: "2025",
-    label: "A New Chapter",
-    text: "Chief Habeeb Olalekan Okunola emerged with 6,926 votes from 16,940 valid votes reported in the 2025 process.",
+    label: "Another Chapter",
+    text: "Chief Habeeb Olalekan Okunola emerged as the 2025 Awardee following the edition's public participation process.",
   },
   {
     year: "2026",
     label: "14th Edition",
-    text: "Engr. Abdulhafis Gbolahan Toriola, FNSE, emerged as the 2026 honouree after receiving 3,850 votes.",
+    text: "Engr. Abdulhafis Gbolahan Toriola, FNSE, emerged as the 2026 Awardee after receiving 3,850 votes.",
   },
 ];
+
+/* =========================================================
+   PAGE
+========================================================= */
 
 export default function DiscoverLasmayaPage() {
   const pageRef = useRef<HTMLElement>(null);
@@ -100,6 +112,8 @@ export default function DiscoverLasmayaPage() {
     if (!page) return;
 
     const ctx = gsap.context(() => {
+      /* HERO */
+
       gsap.from("[data-hero-reveal]", {
         yPercent: 105,
         opacity: 0,
@@ -116,18 +130,24 @@ export default function DiscoverLasmayaPage() {
         ease: "power3.out",
       });
 
-      gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((element) => {
-        gsap.from(element, {
-          scrollTrigger: {
-            trigger: element,
-            start: "top 86%",
-          },
-          y: 45,
-          opacity: 0,
-          duration: 0.9,
-          ease: "power3.out",
+      /* GENERAL REVEALS */
+
+      gsap.utils
+        .toArray<HTMLElement>("[data-reveal]")
+        .forEach((element) => {
+          gsap.from(element, {
+            scrollTrigger: {
+              trigger: element,
+              start: "top 86%",
+            },
+            y: 45,
+            opacity: 0,
+            duration: 0.9,
+            ease: "power3.out",
+          });
         });
-      });
+
+      /* CRITERIA */
 
       gsap.from("[data-criteria-card]", {
         scrollTrigger: {
@@ -141,6 +161,8 @@ export default function DiscoverLasmayaPage() {
         ease: "power3.out",
       });
 
+      /* MILESTONES */
+
       gsap.from("[data-milestone]", {
         scrollTrigger: {
           trigger: "[data-timeline]",
@@ -152,6 +174,8 @@ export default function DiscoverLasmayaPage() {
         duration: 0.85,
         ease: "power3.out",
       });
+
+      /* HISTORY WORD */
 
       gsap.to("[data-history-word]", {
         xPercent: -8,
@@ -169,133 +193,50 @@ export default function DiscoverLasmayaPage() {
   }, []);
 
   return (
-    <main ref={pageRef} className="overflow-hidden bg-[#f5f2e9]">
-
-      {/* =====================================================
-          HERO
-      ===================================================== */}
-
-      <section className="relative flex min-h-[88vh] items-end overflow-hidden bg-[#090b0a] text-[#f5f2e9]">
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute -right-[10%] top-[-20%] h-[800px] w-[800px] rounded-full bg-[#174c3d]/25 blur-[180px]" />
-
-          <div className="absolute bottom-[-30%] left-[-10%] h-[650px] w-[650px] rounded-full bg-[#c6a15b]/10 blur-[170px]" />
-
-          <div className="absolute inset-0 opacity-[0.025] [background-image:linear-gradient(rgba(255,255,255,.5)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.5)_1px,transparent_1px)] [background-size:100px_100px]" />
-        </div>
-
-        <span
-          aria-hidden="true"
-          className="pointer-events-none absolute -bottom-[0.2em] right-[-0.04em] select-none font-display text-[clamp(12rem,32vw,34rem)] font-semibold leading-none tracking-[-0.1em] text-white/[0.025]"
-        >
-          08
-        </span>
-
-        <div className="site-container relative z-10 pb-16 pt-40 sm:pb-20 lg:pb-24 lg:pt-52">
-          <div className="mb-14 flex items-center gap-4">
-            <span className="h-px w-10 bg-[#c6a15b]" />
-
-            <p className="text-[0.55rem] font-bold uppercase tracking-[0.28em] text-[#dfc27b]">
-              Discover LASMAYA
-            </p>
-          </div>
-
-          <div className="grid gap-12 lg:grid-cols-[1.25fr_.75fr] lg:items-end lg:gap-20">
-            <div className="font-display text-[clamp(4rem,10vw,10rem)] font-medium leading-[0.79] tracking-[-0.065em]">
-              <div className="overflow-hidden">
-                <span data-hero-reveal className="block">
-                  A story of
-                </span>
-              </div>
-
-              <div className="overflow-hidden">
-                <span
-                  data-hero-reveal
-                  className="block text-white/25"
-                >
-                  recognition.
-                </span>
-              </div>
-
-              <div className="overflow-hidden">
-                <span
-                  data-hero-reveal
-                  className="block text-[#dfc27b]"
-                >
-                  Since 2008.
-                </span>
-              </div>
-            </div>
-
-            <div data-hero-copy className="lg:pb-3">
-              <div className="mb-7 h-px bg-gradient-to-r from-[#c6a15b] via-white/15 to-transparent" />
-
-              <p className="max-w-[470px] text-[1rem] leading-[1.85] text-white/60">
-                The Lagos State Man of the Year Award is a platform created
-                to identify, recognise and celebrate individuals whose
-                achievements, leadership, integrity and service distinguish
-                them within the Lagos community.
-              </p>
-
-              <div className="mt-9 flex items-center gap-4">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-[#dfc27b]">
-                  <ArrowDown size={13} />
-                </span>
-
-                <span className="text-[0.5rem] font-bold uppercase tracking-[0.2em] text-white/30">
-                  Explore the story
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =====================================================
-          ORIGIN
-      ===================================================== */}
+    <main
+      ref={pageRef}
+      className="overflow-hidden bg-[#f5f2e9]"
+    >
+ 
 
       <section className="relative text-[#102e25]">
         <div className="site-container py-24 sm:py-32 lg:py-40">
           <div className="grid gap-14 lg:grid-cols-[.34fr_1fr] lg:gap-20">
+            {/* LEFT */}
+
             <div data-reveal>
-              <div className="flex items-center gap-4">
-                <span className="h-px w-9 bg-[#a9833f]" />
-
-                <p className="text-[0.52rem] font-bold uppercase tracking-[0.24em] text-[#8d6c32]">
-                  The Beginning
-                </p>
-              </div>
-
-              <p className="mt-6 font-display text-5xl tracking-[-0.05em] text-[#9b7839]">
-                2008
+              <p className="mt-3 text-[1rem] font-bold uppercase tracking-[0.18em] text-[#102e25]/35">
+                The LASMAYA Journey
               </p>
             </div>
 
+            {/* RIGHT */}
+
             <div data-reveal>
-              <p className="max-w-[950px] font-display text-[clamp(2.4rem,5vw,5.5rem)] leading-[1] tracking-[-0.05em]">
-                Created to pay tribute to{" "}
-                <span className="text-[#102e25]/25">
-                  excellence
-                </span>{" "}
-                and bring genuine role models into public view.
+              <p className="max-w-[1050px] font-display text-[clamp(2.5rem,5vw,5.5rem)] font-medium leading-[1] tracking-[-0.05em]">
+                Created to identify,
+                <br />
+                recognise and{" "}
+                <span className="text-[#9b7839]">
+                  project genuine role models.
+                </span>
               </p>
 
               <div className="mt-12 grid gap-8 border-t border-[#102e25]/10 pt-10 md:grid-cols-2 md:gap-14">
                 <p className="text-[0.9rem] leading-[1.9] text-[#26352f]/65">
-                  Published accounts trace LASMAYA to 2008. The award was
-                  conceptualised as a platform for identifying, recognising
-                  and projecting role models whose achievements and service
-                  contribute meaningfully to Lagos State.
+                  LASMAYA was conceptualised as a credible
+                  programme for paying tribute to excellence and as
+                  an award platform for identifying, recognising
+                  and projecting genuine role models in Lagos State,
+                  the Centre of Excellence.
                 </p>
 
                 <p className="text-[0.9rem] leading-[1.9] text-[#26352f]/65">
-                  It is organised by the Centre for Policy Development and
-                  Political Studies, commonly referred to as CEPODEPS or
-                  CPDPS in published reports. Over successive editions, its
-                  nominees have come from public service, business,
-                  engineering, medicine and other areas of professional and
-                  civic life.
+                  Since 2008, the award has continued to bring
+                  individuals from different professional and civic
+                  backgrounds into a process centred on
+                  recognition, contribution, leadership and public
+                  participation.
                 </p>
               </div>
             </div>
@@ -307,50 +248,151 @@ export default function DiscoverLasmayaPage() {
           PHILOSOPHY
       ===================================================== */}
 
-      <section className="relative bg-[#102e25] text-[#f5f2e9]">
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      <section className="relative overflow-hidden bg-[#102e25] text-[#f5f2e9]">
+        <div className="pointer-events-none absolute inset-0">
           <div className="absolute right-[-20%] top-[-30%] h-[700px] w-[700px] rounded-full bg-[#c6a15b]/10 blur-[170px]" />
+
+          <span
+            aria-hidden="true"
+            className="absolute -bottom-[0.2em] left-[-0.04em] font-display text-[clamp(10rem,26vw,28rem)] font-semibold leading-none tracking-[-0.09em] text-white/[0.025]"
+          >
+            ROLE
+          </span>
         </div>
 
         <div className="site-container relative z-10 py-24 sm:py-32 lg:py-40">
           <div className="grid gap-16 lg:grid-cols-[.42fr_1fr] lg:gap-24">
+            {/* LEFT */}
+
             <div data-reveal>
               <p className="text-[0.52rem] font-bold uppercase tracking-[0.25em] text-[#dfc27b]">
-                The Idea
+                The Purpose
               </p>
 
-              <h2 className="mt-7 font-display text-[clamp(3rem,5vw,5.5rem)] leading-[0.92] tracking-[-0.05em]">
+              <h2 className="mt-7 font-display text-[clamp(3rem,5vw,5.5rem)] font-medium leading-[0.92] tracking-[-0.05em]">
                 Recognition
                 <br />
                 with a
                 <br />
-                <span className="text-[#dfc27b]">purpose.</span>
+                <span className="text-[#dfc27b]">
+                  purpose.
+                </span>
               </h2>
             </div>
 
+            {/* RIGHT */}
+
             <div data-reveal>
-              <p className="max-w-[850px] font-display text-[clamp(2rem,3.8vw,4rem)] leading-[1.08] tracking-[-0.04em] text-white/85">
-                LASMAYA was designed around a simple proposition: achievement
-                and service should be seen, acknowledged and preserved.
+              <p className="max-w-[900px] font-display text-[clamp(2rem,3.8vw,4rem)] leading-[1.08] tracking-[-0.04em] text-white/90">
+                LASMAYA exists not simply to present an award, but
+                to identify and project people whose work can stand
+                as examples of excellence, service and leadership.
               </p>
 
               <div className="mt-12 grid gap-10 border-t border-white/10 pt-10 md:grid-cols-2">
                 <p className="text-[0.86rem] leading-[1.9] text-white/50">
-                  Rather than restricting recognition to one profession, the
-                  platform has considered people working across different
-                  sectors of Lagos. Published editions have featured
-                  entrepreneurs, engineers, public servants, political
-                  office-holders, medical professionals and corporate
-                  leaders.
+                  The platform is designed around the idea that
+                  achievement and meaningful contribution deserve
+                  recognition, while genuine role models should be
+                  brought into wider public view.
                 </p>
 
                 <p className="text-[0.86rem] leading-[1.9] text-white/50">
-                  Nomination itself therefore represents a stage of
-                  recognition. The final honouree emerges from a process that
-                  has combined preliminary assessment with public
-                  participation.
+                  Each edition introduces a field of nominees before
+                  public participation contributes to determining
+                  the eventual LASMAYA Awardee.
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================
+          CEPODEPS
+      ===================================================== */}
+
+      <section className="relative overflow-hidden bg-[#ebe6da] text-[#102e25]">
+        <div className="site-container py-24 sm:py-32 lg:py-40">
+          <div className="grid gap-14 lg:grid-cols-[.4fr_1fr] lg:gap-24">
+            {/* LEFT */}
+
+            <div data-reveal>
+              <div className="flex items-center gap-4">
+
+                <p className="text-[1rem] font-bold uppercase tracking-[0.24em] text-[#8d6c32]">
+                  Behind LASMAYA
+                </p>
+              </div>
+
+              <div className="mt-9 flex h-[100px] w-[150px] items-center justify-center bg-white/40 p-4">
+                <img
+                  src="/images/brand/cepodeps-logo.png"
+                  alt="CEPODEPS"
+                  className="max-h-full max-w-full object-contain"
+                />
+              </div>
+
+              <p className="mt-6 text-[0.52rem] font-bold uppercase tracking-[0.2em] text-[#102e25]/35">
+                Organising LASMAYA since 2008
+              </p>
+            </div>
+
+            {/* RIGHT */}
+
+            <div data-reveal>
+              <p className="text-[0.52rem] font-bold uppercase tracking-[0.25em] text-[#8d6c32]">
+                Centre for Policy Development and Political Studies
+              </p>
+
+              <h2 className="mt-7 max-w-[950px] font-display text-[clamp(3rem,6vw,6.5rem)] font-medium leading-[0.9] tracking-[-0.055em]">
+                The organisation
+                <br />
+                <span className="text-[#9b7839]">
+                  behind the award.
+                </span>
+              </h2>
+
+              <p className="mt-10 max-w-[820px] text-[0.94rem] leading-[1.95] text-[#26352f]/65">
+                The Centre for Policy Development and Political
+                Studies — CEPODEPS — was created to develop human
+                capacity for policy making and political
+                development. The Centre works to stimulate
+                leadership skills and has organised LASMAYA since
+                2008 as part of its continuing programmes and
+                initiatives.
+              </p>
+
+              <div className="mt-12 grid gap-x-12 gap-y-7 border-t border-[#102e25]/10 pt-10 sm:grid-cols-2">
+                {[
+                  "Human capacity development",
+                  "Policy making and political development",
+                  "Leadership skills development",
+                  "Academic and research cooperation",
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-start gap-4"
+                  >
+                    <span className="mt-1.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[#a9833f]/40">
+                      <Check
+                        size={10}
+                        className="text-[#9b7839]"
+                      />
+                    </span>
+
+                    <p className="text-[0.78rem] font-medium leading-6 text-[#26352f]/65">
+                      {item}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <p className="mt-10 max-w-[760px] text-[0.78rem] leading-[1.85] text-[#26352f]/50">
+                CEPODEPS also works with academics and researchers
+                from academia whose expertise contributes to its
+                projects and programmes.
+              </p>
             </div>
           </div>
         </div>
@@ -360,7 +402,7 @@ export default function DiscoverLasmayaPage() {
           HOW RECOGNITION WORKS
       ===================================================== */}
 
-      <section className="text-[#102e25]">
+      <section className="bg-[#f5f2e9] text-[#102e25]">
         <div className="site-container py-24 sm:py-32 lg:py-40">
           <div
             data-reveal
@@ -368,133 +410,52 @@ export default function DiscoverLasmayaPage() {
           >
             <div>
               <p className="mb-6 text-[0.52rem] font-bold uppercase tracking-[0.25em] text-[#8d6c32]">
-                The Selection Process
+                The LASMAYA Process
               </p>
 
-              <h2 className="font-display text-[clamp(3.4rem,7vw,7.5rem)] leading-[0.86] tracking-[-0.055em]">
-                How recognition
+              <h2 className="font-display text-[clamp(3.4rem,7vw,7.5rem)] font-medium leading-[0.86] tracking-[-0.055em]">
+                From consideration
                 <br />
-                <span className="text-[#102e25]/25">
-                  takes shape.
+                <span className="text-[#9b7839]">
+                  to recognition.
                 </span>
               </h2>
             </div>
 
-            <p className="max-w-[460px] text-[0.86rem] leading-[1.9] text-[#26352f]/60">
-              Published accounts of LASMAYA describe a process that begins
-              before public voting. Prospective nominees are assessed and a
-              final nominee list is produced before the public participates
-              in determining the eventual honouree.
+            <p className="max-w-[480px] text-[0.86rem] leading-[1.9] text-[#26352f]/60">
+              LASMAYA combines consideration and assessment with
+              public participation before the eventual result and
+              recognition of an Awardee.
             </p>
           </div>
 
-          <div className="mt-16 grid border-t border-[#102e25]/10 lg:grid-cols-3">
-            {[
-              {
-                number: "01",
-                title: "Study & Assessment",
-                text: "Potential nominees are researched and assessed before the final nomination stage.",
-              },
-              {
-                number: "02",
-                title: "Nomination",
-                text: "Individuals meeting the award's considerations are selected for the edition's nominee field.",
-              },
-              {
-                number: "03",
-                title: "Public Participation",
-                text: "The public voting stage provides a direct role in determining who ultimately receives the honour.",
-              },
-            ].map((item, index) => (
-              <article
-                key={item.number}
-                data-reveal
-                className={`py-10 lg:px-9 lg:py-14 ${
-                  index !== 0
-                    ? "border-t border-[#102e25]/10 lg:border-l lg:border-t-0"
-                    : ""
-                }`}
-              >
-                <span className="text-[0.5rem] font-bold tracking-[0.2em] text-[#9b7839]">
-                  {item.number}
-                </span>
-
-                <h3 className="mt-16 font-display text-[2.5rem] tracking-[-0.04em]">
-                  {item.title}
-                </h3>
-
-                <p className="mt-5 max-w-[330px] text-[0.78rem] leading-6 text-[#26352f]/55">
-                  {item.text}
-                </p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* =====================================================
-          CRITERIA
-      ===================================================== */}
-
-      <section className="bg-[#ebe6da] text-[#102e25]">
-        <div className="site-container py-24 sm:py-32 lg:py-40">
-          <div data-reveal className="max-w-[900px]">
-            <p className="text-[0.52rem] font-bold uppercase tracking-[0.25em] text-[#8d6c32]">
-              What LASMAYA Looks For
-            </p>
-
-            <h2 className="mt-7 font-display text-[clamp(3.3rem,6.5vw,7rem)] leading-[0.88] tracking-[-0.055em]">
-              Excellence is more
-              <br />
-              <span className="text-[#102e25]/25">
-                than a title.
-              </span>
-            </h2>
-          </div>
 
           <div
-            data-criteria-grid
-            className="mt-16 grid border-t border-[#102e25]/10 md:grid-cols-2 lg:grid-cols-5"
+            data-reveal
+            className="mt-16 border-l-2 border-[#a9833f] bg-[#ebe6da] px-7 py-8 sm:px-10 sm:py-10"
           >
-            {criteria.map((item, index) => (
-              <article
-                key={item.number}
-                data-criteria-card
-                className={`group relative min-h-[350px] overflow-hidden py-9 md:px-7 ${
-                  index !== 0
-                    ? "border-t border-[#102e25]/10 md:border-l md:border-t-0"
-                    : ""
-                }`}
-              >
-                <div className="absolute inset-0 origin-bottom scale-y-0 bg-[#102e25] transition-transform duration-700 group-hover:scale-y-100" />
+            <div className="grid gap-7 lg:grid-cols-[.25fr_1fr] lg:gap-12">
 
-                <div className="relative z-10">
-                  <span className="text-[0.5rem] font-bold tracking-[0.2em] text-[#9b7839] group-hover:text-[#dfc27b]">
-                    {item.number}
-                  </span>
+              <div>
+                <p className="max-w-[850px] text-[0.86rem] leading-[1.9] text-[#26352f]/65">
+                  For the 2026 edition, ten distinguished nominees
+                  were presented. Public participation was conducted
+                  through SMS voting for seven days, from Monday,
+                  20 July to Sunday, 26 July 2026, before the result
+                  was announced and published.
+                </p>
 
-                  <Check
-                    size={14}
-                    className="ml-auto text-[#9b7839]"
-                  />
-
-                  <h3 className="mt-20 font-display text-[2.2rem] tracking-[-0.04em] transition-colors group-hover:text-[#f5f2e9]">
-                    {item.title}
-                  </h3>
-
-                  <p className="mt-5 text-[0.72rem] leading-6 text-[#26352f]/55 transition-colors group-hover:text-white/55">
-                    {item.text}
-                  </p>
-                </div>
-              </article>
-            ))}
+                <p className="mt-4 max-w-[850px] text-[0.7rem] leading-[1.75] text-[#26352f]/40">
+                  This describes the published process for the 2026
+                  edition and should not be read as a claim that
+                  every historical LASMAYA edition followed exactly
+                  the same voting format or schedule.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
-
-      {/* =====================================================
-          EVOLUTION / HISTORY
-      ===================================================== */}
 
       <section
         data-history-section
@@ -511,23 +472,23 @@ export default function DiscoverLasmayaPage() {
         <div className="site-container relative z-10 py-24 sm:py-32 lg:py-40">
           <div data-reveal>
             <p className="text-[0.52rem] font-bold uppercase tracking-[0.25em] text-[#8d6c32]">
-              Across the Years
+              The LASMAYA Journey
             </p>
 
-            <h2 className="mt-7 max-w-[1000px] font-display text-[clamp(3.5rem,7vw,7.5rem)] leading-[0.86] tracking-[-0.055em]">
-              From an award
+            <h2 className="mt-7 max-w-[1050px] font-display text-[clamp(3.5rem,7vw,7.5rem)] font-medium leading-[0.86] tracking-[-0.055em]">
+              Recognising excellence
               <br />
-              to a continuing{" "}
+              and projecting{" "}
               <span className="text-[#9b7839]">
-                record.
+                role models.
               </span>
             </h2>
 
-            <p className="mt-10 max-w-[650px] text-[0.88rem] leading-[1.9] text-[#26352f]/60">
-              Since its beginnings, LASMAYA has accumulated a history of
-              nominees and honourees from different areas of Lagos life. The
-              names change from edition to edition, but the recurring idea is
-              recognition of achievement, character, leadership and service.
+            <p className="mt-10 max-w-[700px] text-[0.88rem] leading-[1.9] text-[#26352f]/60">
+              Since 2008, LASMAYA has continued its journey of
+              recognising individuals from different areas of Lagos
+              life. Each edition contributes another chapter to the
+              award&apos;s continuing record of recognition.
             </p>
           </div>
 
@@ -543,7 +504,7 @@ export default function DiscoverLasmayaPage() {
               <article
                 key={`${milestone.year}-${milestone.label}`}
                 data-milestone
-                className="relative grid gap-6 border-t border-[#102e25]/10 py-10 pl-9 lg:grid-cols-[170px_.65fr_1fr] lg:gap-12 lg:pl-0 lg:py-12"
+                className="relative grid gap-6 border-t border-[#102e25]/10 py-10 pl-9 lg:grid-cols-[170px_.65fr_1fr] lg:gap-12 lg:py-12 lg:pl-0"
               >
                 <span className="absolute left-[2px] top-[3.15rem] h-[7px] w-[7px] rounded-full bg-[#a9833f] ring-[6px] ring-[#f5f2e9] lg:left-[167px]" />
 
@@ -563,9 +524,9 @@ export default function DiscoverLasmayaPage() {
           </div>
 
           <p className="mt-8 max-w-[700px] text-[0.65rem] leading-6 text-[#26352f]/40">
-            This timeline highlights selected independently documented
-            milestones rather than claiming to be a complete list of every
-            LASMAYA edition.
+            This timeline presents selected milestones in the
+            continuing LASMAYA story rather than claiming to be a
+            complete year-by-year record of every edition.
           </p>
         </div>
       </section>
@@ -575,6 +536,10 @@ export default function DiscoverLasmayaPage() {
       ===================================================== */}
 
       <section className="relative overflow-hidden bg-[#102e25] text-[#f5f2e9]">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute right-[-15%] top-[-30%] h-[650px] w-[650px] rounded-full bg-[#c6a15b]/10 blur-[160px]" />
+        </div>
+
         <span
           aria-hidden="true"
           className="pointer-events-none absolute -bottom-[0.25em] right-[-0.04em] font-display text-[clamp(15rem,35vw,36rem)] font-semibold leading-none tracking-[-0.1em] text-white/[0.025]"
@@ -584,12 +549,14 @@ export default function DiscoverLasmayaPage() {
 
         <div className="site-container relative z-10 py-24 sm:py-32 lg:py-40">
           <div className="grid gap-16 lg:grid-cols-[.35fr_1fr] lg:gap-24">
+            {/* EDITION */}
+
             <div data-reveal>
               <p className="text-[0.52rem] font-bold uppercase tracking-[0.25em] text-[#dfc27b]">
-                Today
+                Current Edition
               </p>
 
-              <p className="mt-8 font-display text-[6rem] leading-none tracking-[-0.07em]">
+              <p className="mt-8 font-display text-[6rem] font-semibold leading-none tracking-[-0.07em]">
                 14
               </p>
 
@@ -598,27 +565,36 @@ export default function DiscoverLasmayaPage() {
               </p>
             </div>
 
+            {/* CONTENT */}
+
             <div data-reveal>
-              <h2 className="font-display text-[clamp(3rem,6vw,6.5rem)] leading-[0.9] tracking-[-0.055em]">
-                The story
+              <p className="text-[0.52rem] font-bold uppercase tracking-[0.25em] text-[#dfc27b]">
+                2026 Awardee
+              </p>
+
+              <h2 className="mt-6 font-display text-[clamp(3rem,6vw,6.5rem)] font-medium leading-[0.9] tracking-[-0.055em]">
+                Engr. Abdulhafis
                 <br />
                 <span className="text-[#dfc27b]">
-                  continues.
+                  Gbolahan Toriola.
                 </span>
               </h2>
 
+              <p className="mt-4 text-[0.62rem] font-bold uppercase tracking-[0.2em] text-white/40">
+                FNSE
+              </p>
+
               <p className="mt-10 max-w-[760px] text-[0.92rem] leading-[1.9] text-white/55">
-                In 2026, Engr. Abdulhafis Gbolahan Toriola, FNSE, emerged
-                from the LASMAYA public voting process with 3,850 votes. The
-                nominee field represented backgrounds including public
-                service, business, engineering and medicine.
+                Engr. Abdulhafis Gbolahan Toriola, FNSE, emerged as
+                the 2026 LASMAYA Awardee after receiving 3,850 votes
+                in the public participation process.
               </p>
 
               <p className="mt-6 max-w-[760px] text-[0.82rem] leading-[1.85] text-white/40">
-                His recognition became the latest chapter in an award history
-                that stretches back to 2008 and continues to document people
-                whose work has attracted public and institutional
-                recognition in Lagos.
+                His recognition forms the latest chapter in a
+                LASMAYA journey that began in 2008 and continues to
+                identify, recognise and project role models in
+                Lagos State.
               </p>
 
               <Link
@@ -648,28 +624,24 @@ export default function DiscoverLasmayaPage() {
             data-reveal
             className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-[#a9833f]/35"
           >
-            <Award size={19} strokeWidth={1.2} className="text-[#9b7839]" />
+            <Award
+              size={19}
+              strokeWidth={1.2}
+              className="text-[#9b7839]"
+            />
           </div>
 
-          <p
-            data-reveal
-            className="mx-auto mt-10 max-w-[1000px] font-display text-[clamp(3rem,6vw,7rem)] leading-[0.9] tracking-[-0.055em]"
-          >
-            Recognising the people
-            <br />
-            behind{" "}
-            <span className="text-[#9b7839]">
-              meaningful impact.
-            </span>
+          <p className="mt-8 text-[1rem] font-bold uppercase tracking-[0.25em] text-[#8d6c32]">
+            The LASMAYA Purpose
           </p>
 
           <p
             data-reveal
-            className="mx-auto mt-8 max-w-[570px] text-[0.85rem] leading-[1.9] text-[#26352f]/55"
+            className="mx-auto mt-8 max-w-[650px] text-[0.88rem] leading-[1.9] text-[#26352f]/55"
           >
-            Every edition introduces another group of nominees, another
-            public conversation and another chapter in the continuing
-            LASMAYA story.
+            Identifying, recognising and projecting genuine role
+            models whose achievements, leadership and service
+            contribute to the continuing story of Lagos State.
           </p>
 
           <div
@@ -680,10 +652,13 @@ export default function DiscoverLasmayaPage() {
               href="/winners"
               className="group inline-flex items-center gap-4"
             >
-              <Landmark size={14} className="text-[#9b7839]" />
+              <Landmark
+                size={14}
+                className="text-[#9b7839]"
+              />
 
               <span className="text-[0.54rem] font-bold uppercase tracking-[0.21em]">
-                Explore Winners
+                Explore Awardees
               </span>
 
               <ArrowUpRight
@@ -698,7 +673,10 @@ export default function DiscoverLasmayaPage() {
               href="/community"
               className="group inline-flex items-center gap-4"
             >
-              <Users size={14} className="text-[#9b7839]" />
+              <Users
+                size={14}
+                className="text-[#9b7839]"
+              />
 
               <span className="text-[0.54rem] font-bold uppercase tracking-[0.21em]">
                 Join the Conversation

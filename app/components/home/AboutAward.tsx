@@ -246,9 +246,8 @@ export default function AboutAward() {
           data-about-label
           className="mb-12 flex items-center gap-4 lg:mb-20"
         >
-          <span className="h-[2px] w-10 bg-[#a9833f]" />
 
-          <p className="text-[0.7rem] font-bold uppercase tracking-[0.25em] text-[#806128]">
+          <p className="text-[1rem] font-bold uppercase tracking-[0.25em] text-[#806128]">
             About LASMAYA
           </p>
         </div>
@@ -299,15 +298,7 @@ export default function AboutAward() {
                 </div>
               </div>
 
-              <div className="mt-7 h-[2px] w-[90px] bg-gradient-to-r from-[#a9833f] via-[#c6a15b] to-transparent sm:w-[120px]" />
 
-              <div className="mt-7 flex items-center gap-4 lg:hidden">
-                <span className="h-px w-10 bg-[#a9833f]" />
-
-                <p className="font-display text-[1.7rem] font-semibold text-[#9b7839]">
-                  Since 2008
-                </p>
-              </div>
             </div>
 
             {/* RIGHT */}
@@ -323,7 +314,7 @@ export default function AboutAward() {
                 <span className="font-bold text-[#102e25]">
                   Lagos State Man of the Year Award
                 </span>{" "}
-                — LASMAYA — was conceptualised as a programme for
+                LASMAYA was conceptualised as a programme for
                 paying tribute to excellence and as a platform for
                 identifying, recognising and projecting genuine role
                 models in Lagos State.
@@ -392,55 +383,7 @@ export default function AboutAward() {
 
               <div className="mt-9 h-[2px] w-[90px] bg-gradient-to-r from-transparent via-[#a9833f] to-transparent sm:mt-11 sm:w-[150px]" />
             </div>
-
-            {/* TIMELINE */}
-
-            <div className="relative mt-14 border-y border-[#102e25]/12 py-10 sm:mt-20 sm:py-12">
-              <div className="absolute left-0 right-0 top-1/2 hidden h-px -translate-y-1/2 bg-[#102e25]/15 md:block" />
-
-              <div className="relative grid gap-10 md:grid-cols-[1fr_auto_1fr] md:items-center md:gap-8">
-                {/* 2008 */}
-
-                <div className="relative bg-[#f5f2e9] md:pr-10">
-                  <p className="mb-2 text-[0.68rem] font-bold uppercase tracking-[0.2em] text-[#806128]">
-                    Beginning
-                  </p>
-
-                  <p className="font-display text-[4.5rem] font-bold leading-none tracking-[-0.06em] text-[#102e25] sm:text-[6rem]">
-                    2008
-                  </p>
-
-                  <p className="mt-4 max-w-[350px] text-[0.94rem] font-medium leading-[1.75] text-[#35473f]">
-                    The beginning of LASMAYA&apos;s continuing journey
-                    of recognising and projecting role models in Lagos.
-                  </p>
-                </div>
-
-                {/* CENTER POINT */}
-
-                <div className="relative z-10 hidden h-12 w-12 items-center justify-center rounded-full border border-[#a9833f]/50 bg-[#f5f2e9] md:flex">
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#a9833f]" />
-                </div>
-
-                {/* 2026 */}
-
-                <div className="relative bg-[#f5f2e9] md:pl-10 md:text-right">
-                  <p className="mb-2 text-[0.68rem] font-bold uppercase tracking-[0.2em] text-[#806128]">
-                    Current Edition
-                  </p>
-
-                  <p className="font-display text-[4.5rem] font-bold leading-none tracking-[-0.06em] text-[#9b7839] sm:text-[6rem]">
-                    2026
-                  </p>
-
-                  <p className="mt-4 max-w-[370px] text-[0.94rem] font-medium leading-[1.75] text-[#35473f] md:ml-auto">
-                    The 14th Edition continues the award&apos;s
-                    recognition journey with ten distinguished nominees
-                    and a public participation stage.
-                  </p>
-                </div>
-              </div>
-            </div>
+           
           </div>
         </div>
       </div>
@@ -583,24 +526,14 @@ export default function AboutAward() {
         data-process
         className="site-container relative z-10 py-24 sm:py-32 lg:py-40"
       >
-        <div className="mb-14 grid gap-8 sm:mb-20 lg:grid-cols-[1fr_.75fr] lg:items-end lg:gap-20">
+        <div className="mb-14  sm:mb-20">
           <div>
             <div className="mb-5 flex items-center gap-3">
-              <span className="h-[2px] w-8 bg-[#a9833f]" />
-
-              <p className="text-[0.68rem] font-bold uppercase tracking-[0.23em] text-[#806128]">
+              <p className="text-[1rem] font-bold uppercase tracking-[0.23em] text-[#806128]">
                 The Recognition Journey
               </p>
             </div>
 
-            <h3 className="font-display text-[clamp(3rem,5.5vw,6rem)] font-bold leading-[0.94] tracking-[-0.045em] text-[#102e25]">
-              How recognition
-              <br />
-
-              <span className="text-[#9b7839]">
-                takes shape.
-              </span>
-            </h3>
           </div>
 
           <p className="max-w-[540px] text-[0.96rem] font-medium leading-[1.85] text-[#35473f] sm:text-[1rem] lg:ml-auto">
@@ -771,9 +704,6 @@ export default function AboutAward() {
         </div>
       </div>
 
-      {/* =====================================================
-          PEOPLE · PURPOSE · PROGRESS
-      ====================================================== */}
 
       <div
         data-principles
@@ -787,70 +717,6 @@ export default function AboutAward() {
           IMPACT
         </div>
 
-        <div className="site-container relative py-24 sm:py-32 lg:py-40">
-          <div className="grid border-t border-[#102e25]/15 lg:grid-cols-3">
-            {principles.map((principle, index) => (
-              <article
-                key={principle.title}
-                data-principle
-                className={`
-                  group
-                  relative
-                  overflow-hidden
-                  border-b
-                  border-[#102e25]/15
-                  py-10
-                  lg:border-b-0
-                  lg:px-9
-                  lg:py-12
-                  ${
-                    index !== 0
-                      ? "lg:border-l lg:border-[#102e25]/15"
-                      : ""
-                  }
-                `}
-              >
-                <div className="pointer-events-none absolute inset-0 origin-bottom scale-y-0 bg-[#102e25] transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-y-100" />
-
-                <div className="pointer-events-none absolute -bottom-[60%] left-1/2 h-[300px] w-[300px] -translate-x-1/2 rounded-full bg-[#c6a15b]/0 blur-[100px] transition-all duration-700 group-hover:bg-[#c6a15b]/10" />
-
-                <span className="absolute left-0 top-0 z-10 h-[2px] w-full origin-left scale-x-0 bg-gradient-to-r from-[#a9833f] via-[#d7b66b] to-transparent transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-x-100" />
-
-                <div className="relative z-10 mb-12 flex items-center justify-between lg:mb-20">
-                  <span className="text-[0.68rem] font-bold tracking-[0.18em] text-[#9b7839] transition-colors duration-500 group-hover:text-[#dfc27b]">
-                    {principle.number}
-                  </span>
-
-                  <span className="h-[7px] w-[7px] rounded-full bg-[#102e25]/30 transition-all duration-500 group-hover:scale-125 group-hover:bg-[#dfc27b] group-hover:shadow-[0_0_15px_rgba(223,194,123,.7)]" />
-                </div>
-
-                <h4 className="relative z-10 font-display text-[clamp(2.7rem,4vw,4.2rem)] font-bold tracking-[-0.04em] text-[#102e25] transition-all duration-500 group-hover:-translate-y-1 group-hover:text-[#f5f2e9]">
-                  {principle.title}
-                </h4>
-
-                <p className="relative z-10 mt-5 max-w-[370px] text-[0.92rem] font-medium leading-[1.78] text-[#35473f] transition-colors duration-500 group-hover:text-[#f5f2e9]/80">
-                  {principle.text}
-                </p>
-
-                <div className="relative z-10 mt-9 flex items-center gap-3 opacity-60 transition-all duration-500 group-hover:translate-x-2 group-hover:opacity-100">
-                  <span className="h-[2px] w-7 bg-[#a9833f] transition-colors duration-500 group-hover:bg-[#dfc27b]" />
-
-                  <ArrowUpRight
-                    size={14}
-                    className="text-[#9b7839] transition-colors duration-500 group-hover:text-[#dfc27b]"
-                  />
-                </div>
-
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute -bottom-7 -right-2 z-[1] font-display text-[8rem] font-semibold leading-none tracking-[-0.08em] text-[#102e25]/[0.018] transition-colors duration-700 group-hover:text-white/[0.02] sm:text-[10rem]"
-                >
-                  {principle.number}
-                </span>
-              </article>
-            ))}
-          </div>
-        </div>
       </div>
 
       {/* =====================================================

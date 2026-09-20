@@ -225,11 +225,10 @@ export default function EditionSpotlight() {
           "
         >
           <div className="flex items-center gap-4">
-            <span className="h-px w-10 bg-[#a9833f]" />
 
             <p
               className="
-                text-[0.56rem]
+                text-[1rem]
                 font-bold
                 uppercase
                 tracking-[0.28em]
@@ -240,20 +239,6 @@ export default function EditionSpotlight() {
             </p>
           </div>
 
-          <p
-            className="
-              hidden
-              text-[0.54rem]
-              font-semibold
-              uppercase
-              tracking-[0.2em]
-              text-[#102e25]/35
-
-              sm:block
-            "
-          >
-            14th Edition
-          </p>
         </div>
 
         {/* =================================================
@@ -422,7 +407,6 @@ export default function EditionSpotlight() {
               "
             >
               <div className="flex items-center gap-3">
-                <span className="h-px w-7 bg-[#a9833f]" />
 
                 <span
                   className="
@@ -433,7 +417,7 @@ export default function EditionSpotlight() {
                     text-[#8d6c32]
                   "
                 >
-                  2026 Honouree
+                  2026 Awardee
                 </span>
               </div>
             </div>
@@ -781,19 +765,7 @@ export default function EditionSpotlight() {
             md:py-16
           "
         >
-          <div>
-            <p
-              className="
-                text-[0.52rem]
-                font-bold
-                uppercase
-                tracking-[0.24em]
-                text-[#8d6c32]
-              "
-            >
-              The 14th Edition
-            </p>
-          </div>
+          
 
           <div>
             <p

@@ -39,7 +39,7 @@ const journey = [
   {
     number: "04",
     icon: Trophy,
-    title: "2026 Honouree",
+    title: "2026 Awardee",
     text:
       "Engr. Abdulhafis Gbolahan Toriola, FNSE, was subsequently recognised as the Lagos State Man of the Year 2026.",
   },
@@ -181,7 +181,7 @@ export default function AwardJourney() {
 
             <div className="overflow-hidden">
               <span className="journey-line block text-[#9b7839]">
-                honouree.
+                Awardee.
               </span>
             </div>
           </div>

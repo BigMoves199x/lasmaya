@@ -690,17 +690,7 @@ export default function Hero() {
           lg:top-[118px]
         "
       >
-        <div className="flex items-center gap-3 sm:gap-4">
-          <span className="h-px w-5 bg-[#dfc27b]/55 sm:w-8" />
-
-          <p className="text-[0.58rem] font-bold uppercase tracking-[0.24em] text-[#dfc27b] sm:text-[0.64rem]">
-            14th Edition
-            <span className="mx-2 text-white/30">·</span>
-            2026
-          </p>
-
-          <span className="h-px w-5 bg-[#dfc27b]/55 sm:w-8" />
-        </div>
+       
       </div>
 
       {/* =====================================================
@@ -728,17 +718,15 @@ export default function Hero() {
           data-title-label
           className="mb-5 flex items-center gap-3 sm:mb-6"
         >
-          <span className="h-[2px] w-8 bg-[#dfc27b] sm:w-10" />
-
           <p
             className="
-              text-[0.66rem]
+              text-[0.84rem]
               font-bold
               uppercase
               tracking-[0.24em]
               text-[#dfc27b]
 
-              sm:text-[0.72rem]
+              sm:text-[1rem]
             "
           >
             Lagos State
@@ -759,12 +747,12 @@ export default function Hero() {
             drop-shadow-[0_10px_40px_rgba(0,0,0,.32)]
 
             sm:text-[clamp(4.5rem,11vw,9rem)]
-            lg:text-[clamp(4.5rem,7.8vw,9rem)]
+            lg:text-[clamp(4.5rem,7.8vw,6rem)]
           "
         >
           <span className="block overflow-hidden pb-[0.05em]">
             <span data-title-line className="block">
-              Man of the
+              Man of 
             </span>
           </span>
 
@@ -773,7 +761,7 @@ export default function Hero() {
               data-title-line
               className="block text-[#f5f2e9]"
             >
-              Year
+            the Year
             </span>
           </span>
         </h1>
@@ -784,7 +772,6 @@ export default function Hero() {
           data-title-line
           className="mt-3 flex items-center gap-4 sm:mt-4 lg:mt-5"
         >
-          <span className="h-[2px] w-10 bg-[#dfc27b] sm:w-12" />
 
           <span
             className="
@@ -809,7 +796,7 @@ export default function Hero() {
           <p
             className="
               max-w-[320px]
-              text-[0.86rem]
+              text-[1rem]
               font-medium
               leading-[1.7]
               text-white/78
@@ -855,17 +842,16 @@ export default function Hero() {
         {/* Awardee label */}
 
         <div className="mb-4 flex items-center gap-3 sm:mb-5">
-          <span className="h-[2px] w-8 bg-[#dfc27b] sm:w-10" />
 
           <p
             className="
-              text-[0.62rem]
+              text-[0.84rem]
               font-bold
               uppercase
               tracking-[0.22em]
               text-[#dfc27b]
 
-              sm:text-[0.68rem]
+              sm:text-[1rem]
             "
           >
             2026 Awardee
@@ -918,7 +904,7 @@ export default function Hero() {
           className="
             mt-4
             max-w-[300px]
-            text-[0.8rem]
+            text-[1rem]
             font-medium
             leading-[1.65]
             text-white/78

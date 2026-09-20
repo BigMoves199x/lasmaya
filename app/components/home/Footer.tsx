@@ -22,7 +22,7 @@ const editionLinks = [
     href: "/editions/2026",
   },
   {
-    label: "2026 Honouree",
+    label: "2026 Awardee",
     href: "/editions/2026",
   },
   {
@@ -74,23 +74,23 @@ export default function Footer() {
       ====================================================== */}
 
       <div className="site-container relative z-10 pt-20 sm:pt-24 lg:pt-28">
-        <div className="grid gap-12 border-b border-white/[0.08] pb-16 lg:grid-cols-[1.25fr_.75fr] lg:items-end lg:gap-20 lg:pb-20">
+        <div className="grid gap-12 border-b border-white/[0.1] pb-16 lg:grid-cols-[1.25fr_.75fr] lg:items-end lg:gap-20 lg:pb-20">
           {/* LEFT */}
 
           <div>
-            <div className="mb-8 flex items-center gap-4">
-              <span className="h-px w-10 bg-[#c6a15b]" />
+            <div className="mb-7 flex items-center gap-4 sm:mb-8">
+              <span className="h-[2px] w-8 bg-[#dfc27b] sm:w-10" />
 
-              <p className="text-[0.52rem] font-bold uppercase tracking-[0.28em] text-[#dfc27b]">
+              <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[#dfc27b] sm:text-[0.74rem]">
                 Lagos State Man of the Year Award
               </p>
             </div>
 
-            <h2 className="max-w-[900px] font-display text-[clamp(3.5rem,7.2vw,7.8rem)] font-medium leading-[0.84] tracking-[-0.055em]">
+            <h2 className="max-w-[900px] font-display text-[clamp(3.4rem,7.2vw,7.8rem)] font-semibold leading-[0.86] tracking-[-0.055em]">
               Celebrating those
               <br />
 
-              <span className="text-white/25">
+              <span className="text-white/40">
                 shaping Lagos.
               </span>
             </h2>
@@ -99,27 +99,13 @@ export default function Footer() {
           {/* RIGHT */}
 
           <div className="lg:pb-2">
-            <div className="mb-6 h-px w-full bg-gradient-to-r from-[#c6a15b]/70 via-white/10 to-transparent" />
+            <div className="mb-6 h-px w-full bg-gradient-to-r from-[#c6a15b]/70 via-white/15 to-transparent" />
 
-            <p className="max-w-[440px] text-[0.86rem] leading-[1.85] text-white/45">
+            <p className="max-w-[520px] text-[1rem] font-semibold leading-[1.8] text-white/75 sm:text-[1.08rem] lg:ml-auto lg:text-[1.12rem]">
               A platform dedicated to recognising leadership,
               service, achievement and meaningful contributions
               to the continuing story of Lagos.
             </p>
-
-            <Link
-              href="/about"
-              className="group mt-8 inline-flex items-center gap-4"
-            >
-              <span className="relative text-[0.5rem] font-bold uppercase tracking-[0.22em] text-[#f5f2e9] transition-colors duration-300 after:absolute after:-bottom-2 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-[#dfc27b] after:transition-transform after:duration-500 group-hover:text-[#dfc27b] group-hover:after:scale-x-100">
-                Discover LASMAYA
-              </span>
-
-              <ArrowUpRight
-                size={13}
-                className="text-[#dfc27b] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-              />
-            </Link>
           </div>
         </div>
       </div>
@@ -129,7 +115,7 @@ export default function Footer() {
       ====================================================== */}
 
       <div className="site-container relative z-10">
-        <div className="grid gap-14 border-b border-white/[0.08] py-14 sm:py-16 lg:grid-cols-[1.2fr_.7fr_.7fr_.8fr] lg:gap-10 lg:py-20">
+        <div className="grid gap-14 border-b border-white/[0.1] py-14 sm:py-16 lg:grid-cols-[1.2fr_.7fr_.7fr_.8fr] lg:gap-10 lg:py-20">
           {/* =================================================
               BRAND
           ================================================== */}
@@ -140,7 +126,7 @@ export default function Footer() {
             <div className="flex items-center gap-5">
               {/* LASMAYA */}
 
-              <div className="flex h-[66px] w-[66px] items-center justify-center rounded-full border border-white/10 bg-white/[0.025] p-2.5">
+              <div className="flex h-[66px] w-[66px] items-center justify-center rounded-full border border-white/15 bg-white/[0.035] p-2.5">
                 <img
                   src="/images/brand/lasmaya-logo.png"
                   alt="LASMAYA logo"
@@ -148,7 +134,7 @@ export default function Footer() {
                 />
               </div>
 
-              <div className="h-10 w-px bg-white/10" />
+              <div className="h-10 w-px bg-white/15" />
 
               {/* CEPODEPS */}
 
@@ -156,7 +142,7 @@ export default function Footer() {
                 <img
                   src="/images/brand/cepodeps-logo.png"
                   alt="CEPODEPS logo"
-                  className="max-h-full max-w-full object-contain opacity-80"
+                  className="max-h-full max-w-full object-contain opacity-90"
                 />
               </div>
             </div>
@@ -164,11 +150,11 @@ export default function Footer() {
             {/* BRAND */}
 
             <div className="mt-8">
-              <p className="font-display text-[2.4rem] font-medium leading-none tracking-[-0.04em]">
+              <p className="font-display text-[2.5rem] font-semibold leading-none tracking-[-0.04em]">
                 LASMAYA
               </p>
 
-              <p className="mt-3 max-w-[270px] text-[0.5rem] font-semibold uppercase leading-[1.8] tracking-[0.18em] text-white/35">
+              <p className="mt-4 max-w-[290px] text-[0.64rem] font-bold uppercase leading-[1.85] tracking-[0.17em] text-white/65 sm:text-[0.68rem]">
                 Lagos State
                 <br />
                 Man of the Year Award
@@ -178,9 +164,9 @@ export default function Footer() {
             {/* EDITION */}
 
             <div className="mt-8 flex items-center gap-3">
-              <span className="h-[5px] w-[5px] rounded-full bg-[#dfc27b] shadow-[0_0_12px_rgba(223,194,123,.65)]" />
+              <span className="h-[6px] w-[6px] rounded-full bg-[#dfc27b] shadow-[0_0_12px_rgba(223,194,123,.65)]" />
 
-              <p className="text-[0.46rem] font-bold uppercase tracking-[0.18em] text-[#dfc27b]/70">
+              <p className="text-[0.58rem] font-bold uppercase tracking-[0.18em] text-[#dfc27b] sm:text-[0.62rem]">
                 14th Edition · 2026
               </p>
             </div>
@@ -191,7 +177,7 @@ export default function Footer() {
           ================================================== */}
 
           <div>
-            <p className="mb-7 text-[0.48rem] font-bold uppercase tracking-[0.24em] text-[#dfc27b]">
+            <p className="mb-7 text-[0.6rem] font-bold uppercase tracking-[0.22em] text-[#dfc27b] sm:text-[0.64rem]">
               Explore
             </p>
 
@@ -200,7 +186,7 @@ export default function Footer() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="group relative text-[0.76rem] text-white/50 transition-colors duration-300 hover:text-[#f5f2e9]"
+                  className="group relative text-[0.84rem] font-semibold leading-relaxed text-white/70 transition-colors duration-300 hover:text-[#f5f2e9] sm:text-[0.88rem]"
                 >
                   <span className="relative block">
                     {item.label}
@@ -217,7 +203,7 @@ export default function Footer() {
           ================================================== */}
 
           <div>
-            <p className="mb-7 text-[0.48rem] font-bold uppercase tracking-[0.24em] text-[#dfc27b]">
+            <p className="mb-7 text-[0.6rem] font-bold uppercase tracking-[0.22em] text-[#dfc27b] sm:text-[0.64rem]">
               2026 Edition
             </p>
 
@@ -226,13 +212,14 @@ export default function Footer() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="group inline-flex items-center gap-2 text-[0.76rem] text-white/50 transition-colors duration-300 hover:text-[#f5f2e9]"
+                  className="group inline-flex items-center gap-2 text-[0.84rem] font-semibold leading-relaxed text-white/70 transition-colors duration-300 hover:text-[#f5f2e9] sm:text-[0.88rem]"
                 >
                   <span>{item.label}</span>
 
                   <ArrowUpRight
-                    size={10}
-                    className="text-[#dfc27b]/50 opacity-0 transition-all duration-300 group-hover:translate-x-[2px] group-hover:-translate-y-[2px] group-hover:opacity-100"
+                    size={11}
+                    strokeWidth={2}
+                    className="text-[#dfc27b] opacity-60 transition-all duration-300 group-hover:translate-x-[2px] group-hover:-translate-y-[2px] group-hover:opacity-100"
                   />
                 </Link>
               ))}
@@ -244,11 +231,11 @@ export default function Footer() {
           ================================================== */}
 
           <div>
-            <p className="mb-7 text-[0.48rem] font-bold uppercase tracking-[0.24em] text-[#dfc27b]">
+            <p className="mb-7 text-[0.6rem] font-bold uppercase tracking-[0.22em] text-[#dfc27b] sm:text-[0.64rem]">
               Community
             </p>
 
-            <p className="max-w-[260px] text-[0.78rem] leading-[1.75] text-white/40">
+            <p className="max-w-[300px] text-[0.86rem] font-semibold leading-[1.8] text-white/70 sm:text-[0.9rem]">
               Have a commendation, suggestion or message for
               LASMAYA? The community space is open to your voice.
             </p>
@@ -257,34 +244,35 @@ export default function Footer() {
               href="/community"
               className="group mt-7 inline-flex items-center gap-3"
             >
-              <span className="text-[0.48rem] font-bold uppercase tracking-[0.2em] text-[#f5f2e9] transition-colors duration-300 group-hover:text-[#dfc27b]">
+              <span className="text-[0.6rem] font-bold uppercase tracking-[0.19em] text-[#f5f2e9] transition-colors duration-300 group-hover:text-[#dfc27b] sm:text-[0.64rem]">
                 Have Your Say
               </span>
 
               <ArrowUpRight
-                size={12}
+                size={13}
+                strokeWidth={2}
                 className="text-[#dfc27b] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
               />
             </Link>
 
             {/* CONTACT */}
 
-            <div className="mt-10 border-t border-white/[0.07] pt-7">
+            <div className="mt-10 border-t border-white/[0.1] pt-7">
               <div className="flex items-center gap-3">
                 <Mail
-                  size={13}
-                  strokeWidth={1.5}
-                  className="text-[#dfc27b]/70"
+                  size={14}
+                  strokeWidth={1.8}
+                  className="text-[#dfc27b]"
                 />
 
-                <span className="text-[0.46rem] font-bold uppercase tracking-[0.18em] text-white/30">
+                <span className="text-[0.58rem] font-bold uppercase tracking-[0.18em] text-white/60 sm:text-[0.62rem]">
                   Contact LASMAYA
                 </span>
               </div>
 
               <Link
                 href="/community"
-                className="mt-3 inline-block text-[0.74rem] text-white/55 transition-colors duration-300 hover:text-[#dfc27b]"
+                className="mt-3 inline-block text-[0.82rem] font-semibold text-white/70 transition-colors duration-300 hover:text-[#dfc27b] sm:text-[0.86rem]"
               >
                 Send a message
               </Link>
@@ -297,11 +285,11 @@ export default function Footer() {
           LARGE LASMAYA WORD
       ====================================================== */}
 
-      <div className="site-container relative z-10 overflow-hidden border-b border-white/[0.08]">
+      <div className="site-container relative z-10 overflow-hidden border-b border-white/[0.1]">
         <div className="relative pt-10 sm:pt-12">
           <p
             aria-hidden="true"
-            className="translate-y-[12%] select-none whitespace-nowrap font-display text-[clamp(6rem,19vw,20rem)] font-semibold leading-[0.72] tracking-[-0.075em] text-white/[0.055]"
+            className="translate-y-[12%] select-none whitespace-nowrap font-display text-[clamp(6rem,19vw,20rem)] font-semibold leading-[0.72] tracking-[-0.075em] text-white/[0.07]"
           >
             LASMAYA
           </p>
@@ -309,9 +297,9 @@ export default function Footer() {
           {/* GOLD ACCENT */}
 
           <div className="absolute bottom-0 right-0 hidden items-center gap-3 pb-5 lg:flex">
-            <span className="h-[5px] w-[5px] rounded-full bg-[#dfc27b]" />
+            <span className="h-[6px] w-[6px] rounded-full bg-[#dfc27b]" />
 
-            <span className="text-[0.42rem] font-bold uppercase tracking-[0.2em] text-[#dfc27b]/50">
+            <span className="text-[0.56rem] font-bold uppercase tracking-[0.19em] text-[#dfc27b]/75">
               Lagos · Nigeria
             </span>
           </div>
@@ -326,14 +314,14 @@ export default function Footer() {
         <div className="flex flex-col gap-7 py-7 sm:flex-row sm:items-center sm:justify-between">
           {/* COPYRIGHT */}
 
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-            <p className="text-[0.44rem] font-semibold uppercase tracking-[0.17em] text-white/25">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+            <p className="text-[0.56rem] font-bold uppercase tracking-[0.16em] text-white/55 sm:text-[0.6rem]">
               © {currentYear} LASMAYA
             </p>
 
-            <span className="hidden h-3 w-px bg-white/10 sm:block" />
+            <span className="hidden h-3 w-px bg-white/15 sm:block" />
 
-            <p className="text-[0.44rem] font-semibold uppercase tracking-[0.17em] text-white/20">
+            <p className="text-[0.56rem] font-semibold uppercase tracking-[0.16em] text-white/50 sm:text-[0.6rem]">
               Lagos State Man of the Year Award
             </p>
           </div>
@@ -343,7 +331,7 @@ export default function Footer() {
           <div className="flex items-center gap-6">
             <Link
               href="/community"
-              className="text-[0.44rem] font-semibold uppercase tracking-[0.17em] text-white/25 transition-colors duration-300 hover:text-[#dfc27b]"
+              className="text-[0.56rem] font-bold uppercase tracking-[0.16em] text-white/55 transition-colors duration-300 hover:text-[#dfc27b] sm:text-[0.6rem]"
             >
               Community
             </Link>
@@ -356,13 +344,14 @@ export default function Footer() {
               aria-label="Back to top"
               className="group flex items-center gap-3"
             >
-              <span className="hidden text-[0.44rem] font-semibold uppercase tracking-[0.17em] text-white/25 transition-colors duration-300 group-hover:text-[#dfc27b] sm:block">
+              <span className="hidden text-[0.56rem] font-bold uppercase tracking-[0.16em] text-white/55 transition-colors duration-300 group-hover:text-[#dfc27b] sm:block sm:text-[0.6rem]">
                 Back to top
               </span>
 
-              <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/40 transition-all duration-500 group-hover:border-[#dfc27b]/50 group-hover:bg-[#dfc27b] group-hover:text-[#090b0a]">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/65 transition-all duration-500 group-hover:border-[#dfc27b]/50 group-hover:bg-[#dfc27b] group-hover:text-[#090b0a]">
                 <ArrowUp
-                  size={12}
+                  size={13}
+                  strokeWidth={2}
                   className="transition-transform duration-300 group-hover:-translate-y-1"
                 />
               </span>
